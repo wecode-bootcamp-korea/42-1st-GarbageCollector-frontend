@@ -1,2 +1,29 @@
-// .Product {
-// }
+.productWrap {
+  :hover {
+    color: #d392ff;
+  }
+
+  .productBox {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    cursor: pointer;
+
+    .productPic {
+      width: 280px;
+      height: 280px;
+      border-radius: 2px;
+    }
+    .productInfo {
+      display: flex;
+      flex-direction: column;
+      height: 53px;
+      margin-top: 20px;
+      padding-top: 22px;
+      text-align: center;
+    }
+    .productInfo p {
+      padding: 10px 0;
+    }
+  }
+}

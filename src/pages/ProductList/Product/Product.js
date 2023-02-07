@@ -1,24 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Product.scss';
 
 const Product = ({ props }) => {
   const [productChange, setProductChange] = useState(false);
   const { productPic, useProductPic, productName, price, productAlt } = props;
 
+  useEffect(() => {}, []);
   return (
-    <ul>
-      <li Link to="#">
-        <img
-          onMouseOver={() => setProductChange(true)}
-          onMouseOut={() => setProductChange(false)}
-          className="itemPicture"
-          src={productChange ? { useProductPic } : { productPic }}
-          alt={productAlt}
-        />
-        <span className="productName">{productName}</span>
-        <span className="productPrice">{price}</span>
-      </li>
-    </ul>
+    <div>
+      <ul
+        className="productWrap"
+        onMouseOver={() => setProductChange(true)}
+        onMouseOut={() => setProductChange(false)}
+      >
+        <li className="productBox">
+          <Link to="#" />
+          <img
+            className="productPic"
+            src={productChange ? useProductPic : productPic}
+            alt={productAlt}
+          />
+          <div className="productInfo">
+            <p className="productName">{productName}</p>
+            <p className="productPrice">{price}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   );
 };
 
