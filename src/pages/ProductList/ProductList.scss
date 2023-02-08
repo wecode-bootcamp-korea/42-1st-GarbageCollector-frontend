@@ -1,2 +1,13 @@
-// .productList {
-// }
+.productListWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  width: 100%;
+
+  .productList {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+  }
+}

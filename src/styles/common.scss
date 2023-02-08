@@ -1,3 +1,15 @@
 * {
   box-sizing: border-box;
 }
+::selection {
+  background-color: #d392ff;
+}
+
+body {
+  font-size: 16px;
+  color: black;
+}
+
+button {
+  cursor: pointer;
+}
