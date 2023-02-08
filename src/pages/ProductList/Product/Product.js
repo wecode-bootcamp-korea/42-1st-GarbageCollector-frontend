@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Product.scss';
 
-const Product = ({ props }) => {
+const Product = ({ product }) => {
   const [productChange, setProductChange] = useState(false);
-  const { productPic, useProductPic, productName, price, productAlt } = props;
+  const { productPic, useProductPic, productName, price, productAlt } = product;
 
-  useEffect(() => {}, []);
   return (
     <div>
       <ul

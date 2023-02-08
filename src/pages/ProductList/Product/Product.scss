@@ -10,14 +10,13 @@
     cursor: pointer;
 
     .productPic {
-      width: 280px;
-      height: 280px;
+      width: 250px;
+      height: 250px;
       border-radius: 2px;
     }
     .productInfo {
       display: flex;
       flex-direction: column;
-      height: 53px;
       margin-top: 20px;
       padding-top: 22px;
       text-align: center;
@@ -25,7 +24,6 @@
     .productInfo p {
       padding: 10px 0;
       transition: 0.3s ease-out;
-      opacity: 1;
     }
   }
 }

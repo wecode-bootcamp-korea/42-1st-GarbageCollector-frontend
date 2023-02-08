@@ -14,8 +14,8 @@ const ProductList = () => {
   return (
     <div className="productListWrap">
       <div className="productList">
-        {productList.map((product, id) => (
-          <Product key={id} props={product} />
+        {productList.map(product => (
+          <Product key={product.id} product={product} />
         ))}
       </div>
     </div>
