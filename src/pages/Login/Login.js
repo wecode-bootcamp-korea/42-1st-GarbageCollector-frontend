@@ -8,7 +8,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // 서버와 통신 시
+  //TODO: API 연결 시 동작할 코드
   // const loginUrl = 'https://10.000.000.0:3000/login';
 
   const isIdEmpty = errorText.id ? true : false;
@@ -38,7 +38,7 @@ const Login = () => {
   const onClickBtnLogin = e => {
     e.preventDefault();
 
-    // 서버와 통신 시
+    //TODO: API 연결 시 동작할 코드
     // fetch(loginUrl, {
     //   method: 'POST',
     //   headers: {
@@ -58,7 +58,6 @@ const Login = () => {
     //       alert('입력이 틀렸습니다');
     //     }
     //   });
-    // Test 시
     fetch('/data/users.json')
       .then(response => response.json())
       .then(result => {

@@ -25,6 +25,7 @@
           min-width: 300px;
           height: 45px;
           padding: 0px 15px;
+          -webkit-appearance: none;
           -webkit-transition: all 0.1s linear;
           -moz-transition: all 0.1s linear;
           transition: all 0.1s linear;
@@ -32,7 +33,6 @@
           border-radius: 5px;
           outline: none;
           font-size: 16px;
-          -webkit-appearance: none;
         }
 
         .input-vacant {
