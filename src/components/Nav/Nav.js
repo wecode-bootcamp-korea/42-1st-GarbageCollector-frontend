@@ -28,7 +28,10 @@ const Nav = () => {
         <ul className="categorywrap">
           {navCategories.map(navcategory => {
             return (
-              <NavCategory key={navcategory.id} navcategory={navcategory} />
+              <NavCategory
+                key={navcategory.id}
+                categoryName={navcategory.categoryName}
+              />
             );
           })}
         </ul>

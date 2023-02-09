@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavCategory = ({ navcategory }) => {
-  const { categoryName } = navcategory;
+const NavCategory = ({ categoryName }) => {
   return (
     <li className="categories">
       <Link to="#">{categoryName}</Link>
