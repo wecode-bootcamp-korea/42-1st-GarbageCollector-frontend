@@ -1,2 +1,154 @@
-// .ProductDetail {
-// }
+@mixin border-top-bot {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
+  padding: 80px 0 200px 0;
+  border: 1px solid red;
+
+  .detail-wrap {
+    border: 1px solid orange;
+
+    .detail-header {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border: 1px solid yellow;
+
+      header {
+        width: 250px;
+        // border: 1px solid green;
+
+        .product-discount-badge {
+          position: relative;
+          color: red;
+          font-size: 12px;
+          text-decoration-line: underline;
+        }
+        .product-name {
+          font-size: 29px;
+          font-weight: 700;
+          letter-spacing: -1px;
+          line-height: 42px;
+        }
+        .product-price {
+          display: flex;
+          align-items: center;
+          margin-top: 20px;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 19px;
+          word-break: keep-all;
+          del {
+            padding-right: 8px;
+            color: #ccc;
+          }
+        }
+      }
+      .detail-product-img {
+        width: 500px;
+        margin: 0 35px;
+      }
+
+      .detail-for-order {
+        display: block;
+        // border: 1px solid blue;
+        .shipping-guide {
+          padding: 16px 0;
+          @include border-top-bot;
+
+          dd {
+            margin-top: 10px;
+            color: #999;
+            line-height: 20px;
+            word-break: keep-all;
+          }
+        }
+        .product-buy-content {
+          // border: 1px solid violet;
+
+          .product-buy-wrap {
+            margin-top: 16px;
+
+            .buy-list-box {
+              margin-top: -1px;
+
+              .buy-list-option {
+                border: 0;
+                @include border-top-bot;
+                .option-btn {
+                  height: 45px;
+                  padding: 0 27px 0 0;
+                  border: transparent;
+                  background-color: transparent;
+                  font-size: inherit;
+                  font-weight: 500;
+                  cursor: pointer;
+
+                  ::after {
+                    position: absolute;
+                    top: 50%;
+                    right: 16px;
+                    width: 12px;
+                    height: 12px;
+                    border: 1px solid darkgoldenrod;
+                    background-image: url(https://brandstore.baemin.com/assets/image/web/arr_select.png);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .buy-list {
+          position: relative;
+          padding: 16px;
+          border-radius: 6px;
+          background-color: #fafafa;
+        }
+        .total-price {
+          display: flex;
+          align-items: center;
+          margin-top: 40px;
+          white-space: nowrap;
+
+          dt {
+            margin-right: 40px;
+            font-weight: 500;
+          }
+          dd {
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 24px;
+          }
+        }
+        .buy-footer {
+          display: flex;
+          justify-content: center;
+          height: 45px;
+          margin-top: 16px;
+
+          .list-cart-btn {
+            width: 45px;
+            padding: 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: transparent;
+
+            .cart-icon {
+              width: 45px;
+              height: 45px;
+              padding: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
