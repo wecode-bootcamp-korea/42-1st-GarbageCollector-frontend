@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Nav.scss';
 import NavCategory from './NavCategory';
 import NavRightWrap from './NavRightWrap';
+import './Nav.scss';
 
 const Nav = () => {
   const [navCategories, setNavCategories] = useState([]);
@@ -19,20 +19,28 @@ const Nav = () => {
       .then(response => response.json())
       .then(data => setNavRightLists(data));
   }, []);
+
   return (
     <nav>
       <div className="navWrap">
         <Link to="#" />
         <img className="logo" src="/images/logo.png" alt="로고" />
         <ul className="categorywrap">
-          {navCategories.map((navcategory, id) => {
-            return <NavCategory key={id} navcategory={navcategory} />;
+          {navCategories.map(navcategory => {
+            return (
+              <NavCategory key={navcategory.id} navcategory={navcategory} />
+            );
           })}
         </ul>
         <div className="nav-right-wrap">
           <ul className="navRightUl">
-            {navRightLists.map((navrighticon, id) => {
-              return <NavRightWrap key={id} navrighticon={navrighticon} />;
+            {navRightLists.map(navrighticon => {
+              return (
+                <NavRightWrap
+                  key={navrighticon.id}
+                  navrighticon={navrighticon}
+                />
+              );
             })}
           </ul>
         </div>
