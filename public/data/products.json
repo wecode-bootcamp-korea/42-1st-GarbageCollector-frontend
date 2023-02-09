@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "productPic": "/images/MingGu1.jpeg",
+    "useProductPic": "/images/MingGu1-2.jpeg",
+    "productName": "밍구는 졸귀탱",
+    "productAlt": "앉은밍구",
+    "price": "100,000,000원"
+  },
+
+  {
+    "id": 2,
+    "productPic": "/images/MingGu2.jpeg",
+    "useProductPic": "/images/MingGu2-2.jpeg",
+    "productName": "게으른 밍구",
+    "productAlt": "누운밍구",
+    "price": "200,000,000원"
+  },
+
+  {
+    "id": 3,
+    "productPic": "/images/Boracay1.jpeg",
+    "useProductPic": "/images/Boracay1-2.jpeg",
+    "productName": "보라카이 패키지",
+    "productAlt": "보라카이",
+    "price": "1,200,000원"
+  },
+
+  {
+    "id": 4,
+    "productPic": "/images/spring.jpeg",
+    "useProductPic": "/images/summer.jpeg",
+    "productName": "봄에서 여름으로",
+    "productAlt": "봄여름",
+    "price": "To be contirue!"
+  }
+]
