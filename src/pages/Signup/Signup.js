@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../config';
 import './Signup.scss';
 
@@ -11,7 +12,13 @@ const Signup = () => {
     userPhoneNum: '',
   });
 
-  const { userPw, pwCheck } = inputValueList;
+  const { userId, userPw, pwCheck, userName, userPhoneNum, userBirthDate } =
+    inputValueList;
+
+  const isValid =
+    userId && userPw && pwCheck && userName && userPhoneNum && userBirthDate;
+
+  const navigate = useNavigate();
 
   const printInfoText = (name, value) => {
     const idRegEx = /[a-z0-9]+@[a-z]+.[a-z]{2,3}/;
@@ -68,11 +75,7 @@ const Signup = () => {
       body: JSON.stringify({}),
     })
       .then(response => response.json())
-      .then(
-        (
-          data // eslint-disable-next-line no-console
-        ) => console.log(data)
-      );
+      .then(data => navigate('/'));
   };
 
   return (
@@ -118,7 +121,9 @@ const Signup = () => {
           })}
         </ul>
       </form>
-      <button onClick={onClickSignup}>가입하기</button>
+      <button onClick={onClickSignup} disabled={!isValid}>
+        가입하기
+      </button>
     </div>
   );
 };
