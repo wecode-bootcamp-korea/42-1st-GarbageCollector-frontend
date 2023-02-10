@@ -4,7 +4,7 @@ import './Product.scss';
 
 const Product = ({ product }) => {
   const [productChange, setProductChange] = useState(false);
-  const { productPic, useProductPic, productName, price, productAlt } = product;
+  const { mainImage, subImage, productName, price, description } = product;
 
   return (
     <div>
@@ -17,8 +17,8 @@ const Product = ({ product }) => {
           <Link to="#" />
           <img
             className="productPic"
-            src={productChange ? useProductPic : productPic}
-            alt={productAlt}
+            src={productChange ? subImage : mainImage}
+            alt={description}
           />
           <div className="productInfo">
             <p className="productName">{productName}</p>
