@@ -9,38 +9,39 @@ const CartItems = props => {
   } = props;
 
   return (
-    <div className="CartItems">
-      <div className="cartItemContainer">
+    <div className="Cart-items">
+      <div className="cart-item-container">
         <input
           type="checkbox"
           onChange={e => handleSingleCheck(e.target.checked, product.id)}
           checked={isAllCheck.includes(product.id) ? true : false}
           name={product.id}
         />
-        <div className="productInfo">
-          <span className="itemName">
-            <img className="productImg " src={product.itemImg} alt="boracay" />
-            <span className="productName">{product.itemName}</span>
+
+        <div className="product-info">
+          <span className="item-name">
+            <img className="product-img " src={product.itemImg} alt="boracay" />
+            <span className="product-name">{product.itemName}</span>
           </span>
-          <div className="productBtn">
+          <div className="product-btn">
             <button
-              className="countBtn"
+              className="count-btn"
               onClick={() => decreaseQuantity(product.id)}
             >
               -
             </button>
-            <input className="countBox" value={product.quantity} />
+            <input className="count-box" value={product.quantity} />
             <button
-              className="countBtn"
+              className="count-btn"
               onClick={() => increaseQuantity(product.id)}
             >
               +
             </button>
           </div>
-          <span className="priceAndDelete">
+          <span className="price-and-delete">
             {product.itemPrice}원
             <button
-              className="deleteBtn"
+              className="delete-btn"
               onClick={() => deleteProduct(product.id)}
             >
               X
