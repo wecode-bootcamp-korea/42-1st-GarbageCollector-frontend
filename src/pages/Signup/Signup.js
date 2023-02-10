@@ -185,6 +185,6 @@ const SIGNUP_INPUT_DATA = [
     infoText: '생년월일 숫자 8자리를 입력해주세요.',
     autoFocus: false,
     className: 'input-vacant',
-    maxLength: 10,
+    maxLength: 8,
   },
 ];
