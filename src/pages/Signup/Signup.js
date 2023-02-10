@@ -67,15 +67,23 @@ const Signup = () => {
   };
 
   const onClickSignup = () => {
-    fetch(`${BASE_URL}/users/signup`, {
+    console.log(userId, userPw, userName, userBirthDate, userPhoneNum);
+    console.log(BASE_URL);
+    fetch(`${BASE_URL}/user/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({
+        email: userId,
+        password: userPw,
+        name: userName,
+        phoneNumber: userPhoneNum,
+        birth: userBirthDate,
+      }),
     })
       .then(response => response.json())
-      .then(data => navigate('/'));
+      .then(data => console.log(data));
   };
 
   return (
