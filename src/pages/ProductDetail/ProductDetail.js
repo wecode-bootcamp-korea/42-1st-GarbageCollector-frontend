@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ProductDetailModal from './ProductDetailModal';
+import ProductOrderModal from './ProductOrderModal';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const [optionOpen, setOptionOpen] = useState(false);
   const [optionDetail, setOptionDetail] = useState([]);
-  console.log(optionDetail);
+
   const showOption = () => {
-    setOptionOpen(true);
+    setOptionOpen(!optionOpen);
   };
 
   useEffect(() => {
@@ -54,24 +55,26 @@ const ProductDetail = () => {
                     <div className="buy-list-option">
                       <button className="option-btn" onClick={showOption}>
                         옵션
-                        {/* <button className="option-arr-btn" /> */}
                       </button>
-                      {optionOpen &&
-                        optionDetail.map(option => {
-                          return (
-                            <ProductDetailModal
-                              key={option.id}
-                              option={option}
-                            />
-                          );
-                        })}
+                      <div className="option-box">
+                        {optionOpen &&
+                          optionDetail.map(option => {
+                            return (
+                              <ProductDetailModal
+                                key={option.id}
+                                option={option.optName}
+                                optionOpen={optionOpen}
+                              />
+                            );
+                          })}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
             <div className="buy-list">
-              <p>옵션을 추가한 후 선택한 list 나올 자리</p>
+              <ProductOrderModal />
             </div>
             <div className="total-price-box">
               <dl className="total-price">

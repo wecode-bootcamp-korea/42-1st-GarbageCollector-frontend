@@ -1,3 +1,4 @@
+/* stylelint-disable max-nesting-depth */
 @mixin border-top-bot {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -18,11 +19,10 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-      border: 1px solid violet;
+      // border: 1px solid violet;
 
       header {
         width: 250px;
-        // border: 1px solid green;
 
         .product-discount-badge {
           position: relative;
@@ -71,43 +71,59 @@
             word-break: keep-all;
           }
         }
-        .product-buy-content {
-          .product-buy-wrap {
-            margin-top: 16px;
 
-            .buy-list-box {
-              margin-top: -1px;
+        .buy-list-box {
+          margin-top: -1px;
 
-              .buy-list-option {
-                border: 0;
-                @include border-top-bot;
-                .option-btn {
-                  height: 45px;
-                  padding: 0 27px 0 0;
-                  border: transparent;
-                  background-color: transparent;
-                  font-size: inherit;
-                  font-weight: 500;
-                  cursor: pointer;
+          .buy-list-option {
+            border: 0;
+            border-top: 1px solid #ddd;
 
-                  .option-arr-btn {
-                    // position: absolute;
-                    top: 50%;
-                    right: 16px;
-                    width: 12px;
-                    height: 12px;
-                    border-color: transparent;
-                    background-color: transparent;
-                    background-image: url(https://brandstore.baemin.com/assets/image/web/arr_select.png);
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: 100% auto;
-                  }
-                }
+            .option-btn {
+              height: 45px;
+              padding: 0 27px 0 0;
+              border: transparent;
+              background-color: transparent;
+              font-size: inherit;
+              font-weight: 500;
+              cursor: pointer;
+
+              .option-btn::after {
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                width: 12px;
+                height: 12px;
+                border-color: transparent;
+                background-color: transparent;
+                background-image: url(https://brandstore.baemin.com/assets/image/web/arr_select.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100% auto;
+              }
+            }
+
+            .option-box {
+              position: absolute;
+              z-index: 1000;
+              width: 300px;
+              border: 1px solid #ddd;
+              border-radius: 6px;
+              background-color: white;
+
+              .option-list {
+                width: 100%;
+                min-height: 50px;
+                padding: 16px 20px;
+                border: none;
+                background-color: transparent;
+                color: #d392ff;
+                text-align: left;
               }
             }
           }
         }
+
         .buy-list {
           position: relative;
           padding: 16px;
