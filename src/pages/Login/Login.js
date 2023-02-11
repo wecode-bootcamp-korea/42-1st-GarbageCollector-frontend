@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+// import { BASE_URL } from '../../config';
 import './Login.scss';
 
 const Login = () => {
@@ -37,38 +38,40 @@ const Login = () => {
 
   const onClickBtnLogin = e => {
     e.preventDefault();
+    console.log(loginInfo.id);
+    console.log(loginInfo.pw);
 
-    //TODO: API 연결 시 동작할 코드
-    // fetch(loginUrl, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    //   body: JSON.stringify({
-    //     email: loginInfo.id,
-    //     password: loginInfo.pw,
-    //   }),
-    // })
-    //   .then(response => response.json())
-    //   .then(result => {
-    //     localStorage.setItem('token', result.accessToken);
-    //     if (localStorage.getItem('token') !== 'undefined') {
-    //       return navigate('/main');
-    //     } else {
-    //       alert('입력이 틀렸습니다');
-    //     }
-    //   });
-    fetch('/data/users.json')
+    fetch('http://10.58.52.241:3000/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: loginInfo.id,
+        password: loginInfo.pw,
+      }),
+    })
       .then(response => response.json())
-      .then(result => {
-        localStorage.setItem('token', result.accessToken);
+      .then(data => {
+        localStorage.setItem('token', data.accessToken);
         if (localStorage.getItem('token') !== 'undefined') {
-          return navigate('/main');
+          return navigate('/');
         } else {
           alert('입력이 틀렸습니다');
         }
       });
   };
+  //   fetch('/data/users.json')
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       localStorage.setItem('token', result.accessToken);
+  //       if (localStorage.getItem('token') !== 'undefined') {
+  //         return navigate('/main');
+  //       } else {
+  //         alert('입력이 틀렸습니다');
+  //       }
+  //     });
+  // };
 
   return (
     <div className="login">
