@@ -8,21 +8,13 @@ const Carousel = () => {
   const [isTransition, setIsTransition] = useState(false);
   const [dataFromServer, setDataFromServer] = useState([]);
 
-  // useEffect(() => {
-  //   setSlideList(IMAGE_LIST);
-  //   setSlideList(prev => [
-  //     IMAGE_LIST[IMAGE_LIST.length - 1],
-  //     ...prev,
-  //     IMAGE_LIST[0],
-  //   ]);
-  // }, []);
-
   useEffect(() => {
-    fetch('carousel.json')
+    fetch('data/carousel.json')
       .then(response => response.json())
       .then(data => {
         setDataFromServer(data);
         setSlideList(data);
+
         setSlideList(prev => [data[data.length - 1], ...prev, data[0]]);
       });
   }, []);
@@ -69,7 +61,7 @@ const Carousel = () => {
     target.className === 'previous'
       ? setCurrentIndex(curIndex => {
           setIsTransition(true);
-          return curIndex - 1;
+          return currentIndex - 1;
         })
       : setCurrentIndex(curIndex => {
           setIsTransition(true);
@@ -87,8 +79,8 @@ const Carousel = () => {
           transition: `all ${action}s`,
         }}
       >
-        {slideList.map(({ src }, idx) => (
-          <img key={idx} alt="Slide" src={src} />
+        {slideList.map((slide, idx) => (
+          <img key={idx} alt={slide.alt} src={slide.src} />
         ))}
       </ul>
       <button className="previous-button" onClick={onClickButton}>
@@ -98,16 +90,6 @@ const Carousel = () => {
         <img className="next" alt=">" src="images/main_arr_next.png" />
       </button>
       <button className="index-button" onClick={clickHandler}>
-        {/* {Array(IMAGE_LIST.length)
-          .fill()
-          .map((_, idx) => (
-            <span
-              key={idx}
-              className={currentIndex === idx + 1 ? 'active' : ''}
-            >
-              {idx + 1}
-            </span>
-          ))} */}
         {dataFromServer.map(data => (
           <span
             key={data.id}
@@ -121,15 +103,3 @@ const Carousel = () => {
   );
 };
 export default Carousel;
-
-const IMAGE_LIST = [
-  {
-    src: 'https://cdn-mart.baemin.com/inventory-unit/c219f0b9-0674-453a-a8a2-7a89ffbd3bf0.png',
-  },
-  {
-    src: 'https://cdn-mart.baemin.com/inventory-unit/24fee219-24f3-479d-8918-95536b469cfb.jpg',
-  },
-  {
-    src: 'https://cdn-mart.baemin.com/inventory-unit/ceb02ee2-d489-4101-8dd7-0b44f7145196.png',
-  },
-];
