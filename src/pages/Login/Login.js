@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { BASE_URL } from '../../config';
+import { BASE_URL } from '../../config';
 import './Login.scss';
 
 const Login = () => {
@@ -8,9 +8,6 @@ const Login = () => {
   const [errorText, setErrorText] = useState({ id: '', pw: '' });
 
   const navigate = useNavigate();
-
-  //TODO: API 연결 시 동작할 코드
-  // const loginUrl = 'https://10.000.000.0:3000/login';
 
   const isIdEmpty = errorText.id ? true : false;
   const isPwEmpty = errorText.pw ? true : false;
@@ -38,10 +35,8 @@ const Login = () => {
 
   const onClickBtnLogin = e => {
     e.preventDefault();
-    console.log(loginInfo.id);
-    console.log(loginInfo.pw);
 
-    fetch('http://10.58.52.241:3000/user/login', {
+    fetch(`${BASE_URL}/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -61,17 +56,6 @@ const Login = () => {
         }
       });
   };
-  //   fetch('/data/users.json')
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       localStorage.setItem('token', result.accessToken);
-  //       if (localStorage.getItem('token') !== 'undefined') {
-  //         return navigate('/main');
-  //       } else {
-  //         alert('입력이 틀렸습니다');
-  //       }
-  //     });
-  // };
 
   return (
     <div className="login">
