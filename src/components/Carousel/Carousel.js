@@ -6,14 +6,25 @@ const Carousel = () => {
   const [slideList, setSlideList] = useState([]);
   const [action, setAction] = useState(true);
   const [isTransition, setIsTransition] = useState(false);
+  const [dataFromServer, setDataFromServer] = useState([]);
+
+  // useEffect(() => {
+  //   setSlideList(IMAGE_LIST);
+  //   setSlideList(prev => [
+  //     IMAGE_LIST[IMAGE_LIST.length - 1],
+  //     ...prev,
+  //     IMAGE_LIST[0],
+  //   ]);
+  // }, []);
 
   useEffect(() => {
-    setSlideList(IMAGE_LIST);
-    setSlideList(prev => [
-      IMAGE_LIST[IMAGE_LIST.length - 1],
-      ...prev,
-      IMAGE_LIST[0],
-    ]);
+    fetch('carousel.json')
+      .then(response => response.json())
+      .then(data => {
+        setDataFromServer(data);
+        setSlideList(data);
+        setSlideList(prev => [data[data.length - 1], ...prev, data[0]]);
+      });
   }, []);
 
   useEffect(() => {
@@ -87,7 +98,7 @@ const Carousel = () => {
         <img className="next" alt=">" src="images/main_arr_next.png" />
       </button>
       <button className="index-button" onClick={clickHandler}>
-        {Array(IMAGE_LIST.length)
+        {/* {Array(IMAGE_LIST.length)
           .fill()
           .map((_, idx) => (
             <span
@@ -96,7 +107,15 @@ const Carousel = () => {
             >
               {idx + 1}
             </span>
-          ))}
+          ))} */}
+        {dataFromServer.map(data => (
+          <span
+            key={data.id}
+            className={currentIndex === data.id ? 'active' : ''}
+          >
+            {data.id}
+          </span>
+        ))}
       </button>
     </div>
   );
