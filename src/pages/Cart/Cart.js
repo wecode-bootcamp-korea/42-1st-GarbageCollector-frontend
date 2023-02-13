@@ -15,22 +15,6 @@ const Cart = () => {
       .then(data => setProductList(data));
   }, []);
 
-  // useEffect(() => {
-  //   fetch('http://10.58.52.169:3000/cart/getcart', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       userId: '1',
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setProductList(data);
-  //     });
-  // }, []);
-
   const deleteProduct = cartId => {
     const nextProduct = productList.filter(
       product => product.cartId !== cartId
@@ -84,10 +68,23 @@ const Cart = () => {
     }
   };
 
-  const handleDeleteSelected = () => {};
+  const handleDeleteSelected = () => {
+    const selectedProductIds = isAllCheck;
+    const nextProductList = productList.filter(
+      product => !selectedProductIds.includes(product.cartId)
+    );
+    setProductList(nextProductList);
+    setIsAllCheck([]);
+    alert('선택한 상품이 삭제되었습니다.');
+  };
 
   const isDisplayNone =
     productList.length === 0 ? 'check-all-display-none' : 'check-all';
+
+  const totalCost =
+    productList[0] && typeof productList[0].deliverFee === 'number'
+      ? (productList[0].deliverFee + totalAmount).toLocaleString()
+      : '0';
 
   return (
     <div className="cart">
@@ -157,10 +154,7 @@ const Cart = () => {
 
               <div className="estimated-amount">
                 <p>결제예상금액</p>
-                <p>
-                  {(productList[0]?.deliverFee + totalAmount).toLocaleString()}
-                  원
-                </p>
+                <p>{totalCost}원</p>
               </div>
               <button
                 type="button"
