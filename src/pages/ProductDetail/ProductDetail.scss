@@ -58,6 +58,7 @@
 
       .detail-for-order {
         display: block;
+        position: relative;
         width: 300px;
 
         .shipping-guide {
@@ -125,33 +126,6 @@
           }
         }
 
-        .buy-list {
-          position: relative;
-          margin-top: 16px;
-          padding: 16px;
-          border-radius: 6px;
-          background-color: #fafafa;
-
-          h4 {
-            font-size: 14px;
-            font-weight: 400;
-          }
-
-          .buy-options {
-            display: flex;
-            margin-top: 14px;
-
-            .buy-quantity {
-              position: relative;
-              width: 108px;
-              height: 26px;
-              padding: 0 30px;
-
-              .quantity-input {
-              }
-            }
-          }
-        }
         .total-price {
           display: flex;
           align-items: center;

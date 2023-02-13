@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
+import './ProductOrder.scss';
 
 const ProductOrderModal = ({ option }) => {
-  const [productQuantity, setProductQuantity] = useState([]);
+  const [productQuantity, setProductQuantity] = useState(1);
 
   const { optName, addPrice, price, removeOrder } = option;
 
-  // const handlePlus = cartId => {
-  //   const orderlist = productQuantity.map(props => {
-  //     if (cartId) return { ...props, quantity: quantity + 1 };
-  //     else return props;
-  //   });
-  //   setProductQuantity(orderlist);
-  // };
-
-  // const handleMinus = cartId => {
-  //   const orderlist = productQuantity.map(props => {
-  //     if (cartId) return { ...props, quantity: quantity - 1 };
-  //     else return props;
-  //   });
-  //   setProductQuantity(orderlist);
-  // };
+  const handlePlus = () => {
+    setProductQuantity(productQuantity + 1);
+  };
+  const handleMinus = () => {
+    if (productQuantity > 1) {
+      setProductQuantity(productQuantity - 1);
+    }
+  };
 
   function quantityChange(e) {
     setProductQuantity(e.target.value);
@@ -30,7 +24,7 @@ const ProductOrderModal = ({ option }) => {
       <h4>{optName}</h4>
       <div className="buy-options">
         <div className="buy-quantity">
-          <button className="btn-minus">-</button>
+          <button onClick={handleMinus} className="btn-minus" />
           <input
             className="quantity-input"
             onChange={e => {
@@ -39,10 +33,10 @@ const ProductOrderModal = ({ option }) => {
             type="number"
             value={productQuantity}
           />
-          <button className="btn-plus">+</button>
+          <button onClick={handlePlus} className="btn-plus" />
         </div>
-        <p>
-          <span>{addPrice + price}원</span>
+        <p className="price">
+          <span>{productQuantity * (addPrice + price)}원</span>
         </p>
       </div>
       <button onClick={() => removeOrder(option.id)} className="btn-delete" />

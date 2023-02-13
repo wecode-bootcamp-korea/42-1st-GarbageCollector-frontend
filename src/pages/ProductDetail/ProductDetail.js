@@ -6,35 +6,26 @@ import './ProductDetail.scss';
 const ProductDetail = () => {
   const [optionOpen, setOptionOpen] = useState(false);
   const [optionDetail, setOptionDetail] = useState([]);
-  // const [orderItemList, setOrderItemList] = useState([]);
-  const [optionSelect, setOptionSelect] = useState(0);
-  const [orderListIndex, setOrderListIndex] = useState();
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const showOption = () => {
     setOptionOpen(!optionOpen);
   };
-  const getOrderListIndex = idx => {
-    setOrderListIndex(idx);
+
+  const onSelect = option => {
+    setSelectedOptions(prevState => {
+      const set = new Set([...prevState, option]);
+      return [...set];
+    });
+    setOptionOpen(false);
   };
 
-  // const handleOption = () => {
-  //   setOptionDetail(prevState => {
-  //     return [...prevState, ...optionDetail];
-  //   });
-  // };
-
-  const onSelect = (e, idx) => {
-    setOptionSelect(parseInt(e.target.value));
-    getOrderListIndex(idx);
+  const removeOrder = id => {
+    const updatedSelectedOptions = selectedOptions.filter(
+      option => option.id !== id
+    );
+    setSelectedOptions(updatedSelectedOptions);
   };
-
-  // const removeOrder = id => {
-  //   setOptionSelect(
-  //     optionSelect.filter(orderlist => {
-  //       return orderlist.id !== id;
-  //     })
-  //   );
-  // };
 
   useEffect(() => {
     fetch('/data/optionModal.json')
@@ -88,9 +79,9 @@ const ProductDetail = () => {
                               <ProductDetailModal
                                 key={option.id}
                                 option={option}
-                                optionOpen={optionOpen}
+                                // optionOpen={optionOpen}
                                 onSelect={onSelect}
-                                showOption={showOption}
+                                // showOption={showOption}
                               />
                             );
                           })}
@@ -101,6 +92,19 @@ const ProductDetail = () => {
               </div>
             </section>
             <ul className="buy-list-box">
+              {selectedOptions.map(option => {
+                return (
+                  <ProductOrderModal
+                    key={option.id}
+                    option={option}
+                    removeOrder={removeOrder}
+                    selectedOptions={selectedOptions}
+                  />
+                );
+              })}
+            </ul>
+
+            {/* <ul className="buy-list-box">
               {optionDetail.map(option => {
                 return option.id === orderListIndex ? (
                   <ProductOrderModal
@@ -111,8 +115,7 @@ const ProductDetail = () => {
                   />
                 ) : null;
               })}
-              {/* {console.log(option.id)} */}
-            </ul>
+            </ul> */}
             <div className="total-price-box">
               <dl className="total-price">
                 <dt>총 금액</dt>
