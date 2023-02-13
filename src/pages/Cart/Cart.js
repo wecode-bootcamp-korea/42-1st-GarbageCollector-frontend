@@ -15,24 +15,42 @@ const Cart = () => {
       .then(data => setProductList(data));
   }, []);
 
-  const deleteProduct = id => {
-    const nextProduct = productList.filter(product => product.id !== id);
+  // useEffect(() => {
+  //   fetch('http://10.58.52.169:3000/cart/getcart', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       userId: '1',
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setProductList(data);
+  //     });
+  // }, []);
+
+  const deleteProduct = cartId => {
+    const nextProduct = productList.filter(
+      product => product.cartId !== cartId
+    );
     alert('상품이 삭제됩니다');
     setProductList(nextProduct);
   };
 
-  const increaseQuantity = id => {
+  const increaseQuantity = cartId => {
     const nextProductList = productList.map(product => {
-      if (product.id === id)
+      if (product.cartId === cartId)
         return { ...product, quantity: product.quantity + 1 };
       else return product;
     });
     setProductList(nextProductList);
   };
 
-  const decreaseQuantity = id => {
+  const decreaseQuantity = cartId => {
     const nextProductList = productList.map(product => {
-      if (product.id === id)
+      if (product.cartId === cartId)
         return {
           ...product,
           quantity: product.quantity && product.quantity - 1,
@@ -43,7 +61,7 @@ const Cart = () => {
   };
 
   const totalAmount = productList.reduce(
-    (acc, curr) => acc + curr.quantity * curr.itemPrice,
+    (acc, curr) => acc + curr.quantity * curr.productTotalPrice,
     0
   );
   const isDisabled = productList.length === 0 ? true : false;
@@ -59,7 +77,7 @@ const Cart = () => {
   const handleAllCheck = checked => {
     if (checked) {
       const idArray = [];
-      productList.forEach(el => idArray.push(el.id));
+      productList.forEach(el => idArray.push(el.cartId));
       setIsAllCheck(idArray);
     } else {
       setIsAllCheck([]);
@@ -67,6 +85,9 @@ const Cart = () => {
   };
 
   const handleDeleteSelected = () => {};
+
+  const isDisplayNone =
+    productList.length === 0 ? 'check-all-display-none' : 'check-all';
 
   return (
     <div className="cart">
@@ -77,18 +98,27 @@ const Cart = () => {
 
         <div className="cart-center">
           <div className="main-left">
-            <div className="check-all">
-              <input
-                type="checkbox"
-                name="select-all"
-                onChange={e => handleAllCheck(e.target.checked)}
-                checked={
-                  productList.length === isAllCheck.length ? true : false
-                }
-              />
-              <span>Select All</span>
-              <button onClick={handleDeleteSelected}>선택삭제</button>
+            <div className={isDisplayNone}>
+              <div>
+                <input
+                  id="chkbox"
+                  type="checkbox"
+                  name="select-all"
+                  onChange={e => handleAllCheck(e.target.checked)}
+                  checked={
+                    productList.length === isAllCheck.length ? true : false
+                  }
+                />
+
+                <span for="chkbox" className="all-select-list">
+                  전체 선택
+                </span>
+              </div>
+              <button className="select-delete" onClick={handleDeleteSelected}>
+                선택삭제
+              </button>
             </div>
+
             {productList.length === 0 ? (
               <div className="empty-cart">
                 <img
@@ -100,7 +130,7 @@ const Cart = () => {
             ) : (
               productList.map(product => (
                 <CartItems
-                  key={product.id}
+                  key={product.cartId}
                   product={product}
                   deleteProduct={deleteProduct}
                   increaseQuantity={increaseQuantity}
@@ -121,13 +151,16 @@ const Cart = () => {
                 </div>
                 <div className="delivery-fee">
                   <p>배송비</p>
-                  <p>원</p>
+                  <p>+{productList[0]?.deliverFee} 원</p>
                 </div>
               </div>
 
               <div className="estimated-amount">
                 <p>결제예상금액</p>
-                <p>{totalAmount.toLocaleString()} 원</p>
+                <p>
+                  {(productList[0]?.deliverFee + totalAmount).toLocaleString()}
+                  원
+                </p>
               </div>
               <button
                 type="button"

@@ -1,23 +1,26 @@
 [
   {
-    "id": 1,
-    "itemImg": "/images/Boracay1.jpeg",
-    "itemName": "보라카이 가서 한잔",
-    "itemPrice": 15000,
-    "quantity": 1
+    "cartId": 1,
+    "productMainImage": "/images/Boracay1.jpeg",
+    "productName": "보라카이 가서 한잔",
+    "productTotalPrice": 15000,
+    "quantity": 1,
+    "deliverFee": 3000
   },
   {
-    "id": 2,
-    "itemImg": "/images/Boracay1.jpeg",
-    "itemName": "보라카이 가서 두잔",
-    "itemPrice": 5000,
-    "quantity": 1
+    "cartId": 2,
+    "productMainImage": "/images/Boracay1.jpeg",
+    "productName": "보라카이 가서 두잔",
+    "productTotalPrice": 5000,
+    "quantity": 1,
+    "deliverFee": 3000
   },
   {
-    "id": 3,
-    "itemImg": "/images/Boracay1.jpeg",
-    "itemName": "보라카이 가서 세잔",
-    "itemPrice": 100000,
-    "quantity": 1
+    "cartId": 3,
+    "productMainImage": "/images/Boracay1.jpeg",
+    "productName": "보라카이 가서 세잔",
+    "productTotalPrice": 100000,
+    "quantity": 1,
+    "deliverFee": 3000
   }
 ]

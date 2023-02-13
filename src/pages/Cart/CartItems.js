@@ -1,3 +1,5 @@
+import React from 'react';
+
 const CartItems = props => {
   const {
     product,
@@ -13,36 +15,40 @@ const CartItems = props => {
       <div className="cart-item-container">
         <input
           type="checkbox"
-          onChange={e => handleSingleCheck(e.target.checked, product.id)}
-          checked={isAllCheck.includes(product.id) ? true : false}
-          name={product.id}
+          onChange={e => handleSingleCheck(e.target.checked, product.cartId)}
+          checked={isAllCheck.includes(product.cartId) ? true : false}
+          name={product.cartId}
         />
-
+        <label for="chkbox" className="all-select-list" />
         <div className="product-info">
           <span className="item-name">
-            <img className="product-img " src={product.itemImg} alt="boracay" />
-            <span className="product-name">{product.itemName}</span>
+            <img
+              className="product-img "
+              src={product.productMainImage}
+              alt=""
+            />
+            <span className="product-name">{product.productName}</span>
           </span>
           <div className="product-btn">
             <button
               className="count-btn"
-              onClick={() => decreaseQuantity(product.id)}
+              onClick={() => decreaseQuantity(product.cartId)}
             >
               -
             </button>
             <input className="count-box" value={product.quantity} />
             <button
               className="count-btn"
-              onClick={() => increaseQuantity(product.id)}
+              onClick={() => increaseQuantity(product.cartId)}
             >
               +
             </button>
           </div>
           <span className="price-and-delete">
-            {product.itemPrice}원
+            {product.productTotalPrice * product.quantity}원
             <button
               className="delete-btn"
-              onClick={() => deleteProduct(product.id)}
+              onClick={() => deleteProduct(product.cartId)}
             >
               X
             </button>
