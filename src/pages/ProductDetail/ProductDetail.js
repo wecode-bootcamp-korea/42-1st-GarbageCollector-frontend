@@ -6,10 +6,35 @@ import './ProductDetail.scss';
 const ProductDetail = () => {
   const [optionOpen, setOptionOpen] = useState(false);
   const [optionDetail, setOptionDetail] = useState([]);
+  // const [orderItemList, setOrderItemList] = useState([]);
+  const [optionSelect, setOptionSelect] = useState(0);
+  const [orderListIndex, setOrderListIndex] = useState();
 
   const showOption = () => {
     setOptionOpen(!optionOpen);
   };
+  const getOrderListIndex = idx => {
+    setOrderListIndex(idx);
+  };
+
+  // const handleOption = () => {
+  //   setOptionDetail(prevState => {
+  //     return [...prevState, ...optionDetail];
+  //   });
+  // };
+
+  const onSelect = (e, idx) => {
+    setOptionSelect(parseInt(e.target.value));
+    getOrderListIndex(idx);
+  };
+
+  // const removeOrder = id => {
+  //   setOptionSelect(
+  //     optionSelect.filter(orderlist => {
+  //       return orderlist.id !== id;
+  //     })
+  //   );
+  // };
 
   useEffect(() => {
     fetch('/data/optionModal.json')
@@ -62,8 +87,10 @@ const ProductDetail = () => {
                             return (
                               <ProductDetailModal
                                 key={option.id}
-                                option={option.optName}
+                                option={option}
                                 optionOpen={optionOpen}
+                                onSelect={onSelect}
+                                showOption={showOption}
                               />
                             );
                           })}
@@ -73,9 +100,19 @@ const ProductDetail = () => {
                 </div>
               </div>
             </section>
-            <div className="buy-list">
-              <ProductOrderModal />
-            </div>
+            <ul className="buy-list-box">
+              {optionDetail.map(option => {
+                return option.id === orderListIndex ? (
+                  <ProductOrderModal
+                    key={option.id}
+                    option={optionDetail[orderListIndex]}
+                    // removeOrder={removeOrder}
+                    // handleOption={handleOption}
+                  />
+                ) : null;
+              })}
+              {/* {console.log(option.id)} */}
+            </ul>
             <div className="total-price-box">
               <dl className="total-price">
                 <dt>총 금액</dt>

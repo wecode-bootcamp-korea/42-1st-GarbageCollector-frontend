@@ -1,12 +1,18 @@
 import React from 'react';
 
 const ProductDetailModal = props => {
-  const { option, optionOpen } = props;
+  const { option, onSelect, showOption, handleOption } = props;
 
   return (
-    <ul className="option-ul">
-      <li onClick={optionOpen}>
-        <button className="option-list">{option}</button>
+    <ul
+      value={option.id}
+      onClick={e => onSelect(e, option.id)}
+      className="option-ul"
+    >
+      <li onClick={handleOption}>
+        <button onClick={showOption} value={option.id} className="option-list">
+          {option.optName}
+        </button>
       </li>
     </ul>
   );

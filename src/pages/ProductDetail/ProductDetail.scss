@@ -73,6 +73,7 @@
         }
 
         .buy-list-box {
+          position: relative;
           margin-top: -1px;
 
           .buy-list-option {
@@ -126,9 +127,30 @@
 
         .buy-list {
           position: relative;
+          margin-top: 16px;
           padding: 16px;
           border-radius: 6px;
           background-color: #fafafa;
+
+          h4 {
+            font-size: 14px;
+            font-weight: 400;
+          }
+
+          .buy-options {
+            display: flex;
+            margin-top: 14px;
+
+            .buy-quantity {
+              position: relative;
+              width: 108px;
+              height: 26px;
+              padding: 0 30px;
+
+              .quantity-input {
+              }
+            }
+          }
         }
         .total-price {
           display: flex;
