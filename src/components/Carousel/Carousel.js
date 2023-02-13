@@ -4,7 +4,7 @@ import './Carousel.scss';
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideList, setSlideList] = useState([]);
-  const [action, setAction] = useState(true);
+  const [action, setAction] = useState(1);
   const [isTransition, setIsTransition] = useState(false);
   const [dataFromServer, setDataFromServer] = useState([]);
 
@@ -14,7 +14,6 @@ const Carousel = () => {
       .then(data => {
         setDataFromServer(data);
         setSlideList(data);
-
         setSlideList(prev => [data[data.length - 1], ...prev, data[0]]);
       });
   }, []);
@@ -31,11 +30,10 @@ const Carousel = () => {
       setIsTransition(false);
     }, 1000);
 
-    const startIndex = 0;
-    currentIndex === startIndex &&
+    currentIndex === 0 &&
       setTimeout(() => {
         setAction(0);
-        setCurrentIndex(3);
+        setCurrentIndex(slideList.length - 2);
         setTimeout(() => {
           setAction(1);
         }, 20);
@@ -51,17 +49,17 @@ const Carousel = () => {
     return () => {};
   }, [currentIndex, slideList.length]);
 
-  const clickHandler = ({ target }) => {
-    setCurrentIndex(Number(target.innerText));
+  const onClickBtnIndex = e => {
+    setCurrentIndex(Number(e.target.innerText));
   };
 
-  const onClickButton = ({ target }) => {
+  const onClickBtnArrow = e => {
     if (isTransition) return;
     setAction(1);
-    target.className === 'previous'
+    e.target.className === 'previous'
       ? setCurrentIndex(curIndex => {
           setIsTransition(true);
-          return currentIndex - 1;
+          return curIndex - 1;
         })
       : setCurrentIndex(curIndex => {
           setIsTransition(true);
@@ -83,13 +81,13 @@ const Carousel = () => {
           <img key={idx} alt={slide.alt} src={slide.src} />
         ))}
       </ul>
-      <button className="previous-button" onClick={onClickButton}>
+      <button className="previous-button" onClick={onClickBtnArrow}>
         <img className="previous" alt="<" src="images/main_arr_prev.png" />
       </button>
-      <button className="next-button" onClick={onClickButton}>
+      <button className="next-button" onClick={onClickBtnArrow}>
         <img className="next" alt=">" src="images/main_arr_next.png" />
       </button>
-      <button className="index-button" onClick={clickHandler}>
+      <button className="index-button" onClick={onClickBtnIndex}>
         {dataFromServer.map(data => (
           <span
             key={data.id}
