@@ -15,7 +15,7 @@ module.exports = {
     // Team내 컨벤션으로 수정 (현재 kebab-case)
     'keyframes-name-pattern': /^([a-z][a-z0-9]*)(-[a-z0-9]+)*$/,
     // Team내 컨벤션으로 수정 (현재 kebab-case)
-    //'max-nesting-depth': 3, // 최대 nesting은 3depth 까지
+    // 'max-nesting-depth': 3, // 최대 nesting은 3depth 까지
     'no-descending-specificity': null,
     'string-quotes': 'single', // single quotes
     'scss/at-rule-conditional-no-parentheses': null,
