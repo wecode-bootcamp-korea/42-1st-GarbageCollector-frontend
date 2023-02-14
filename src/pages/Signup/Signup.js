@@ -67,8 +67,6 @@ const Signup = () => {
   };
 
   const onClickSignup = () => {
-    console.log(userId, userPw, userName, userBirthDate, userPhoneNum);
-    console.log(BASE_URL);
     fetch(`${BASE_URL}/user/signup`, {
       method: 'POST',
       headers: {
