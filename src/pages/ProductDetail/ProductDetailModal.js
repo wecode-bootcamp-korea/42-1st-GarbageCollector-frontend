@@ -15,11 +15,6 @@ const ProductDetailModal = props => {
 
   return (
     <ul value={option.id} onClick={getOption} className="option-ul">
-      {/* <ul
-      value={option.id}
-      onClick={e => onSelect(e, option.id)}
-      className="option-ul"
-    ></ul> */}
       <li onClick={handleOption}>
         <button onClick={showOption} value={option.id} className="option-list">
           {option.optName}

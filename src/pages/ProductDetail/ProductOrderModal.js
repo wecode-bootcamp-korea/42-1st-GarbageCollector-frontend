@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './ProductOrder.scss';
 
-const ProductOrderModal = ({ option }) => {
+const ProductOrderModal = ({ option, removeOrder, selectedOptions }) => {
   const [productQuantity, setProductQuantity] = useState(1);
 
-  const { optName, addPrice, price, removeOrder } = option;
+  const { optName, addPrice, price } = option;
 
   const handlePlus = () => {
     setProductQuantity(productQuantity + 1);

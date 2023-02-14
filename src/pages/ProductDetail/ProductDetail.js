@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ProductDetailModal from './ProductDetailModal';
 import ProductOrderModal from './ProductOrderModal';
+import ProductDes from './ProductDes';
+import ProductInfoTab from './ProductInfoTab';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const [optionOpen, setOptionOpen] = useState(false);
   const [optionDetail, setOptionDetail] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [productDetail, setProductDetail] = useState([]);
 
   const showOption = () => {
     setOptionOpen(!optionOpen);
@@ -31,6 +34,12 @@ const ProductDetail = () => {
     fetch('/data/optionModal.json')
       .then(response => response.json())
       .then(data => setOptionDetail(data));
+  }, []);
+
+  useEffect(() => {
+    fetch('/data/productInfo.json')
+      .then(response => response.json())
+      .then(data => setProductDetail(data));
   }, []);
 
   return (
@@ -79,9 +88,7 @@ const ProductDetail = () => {
                               <ProductDetailModal
                                 key={option.id}
                                 option={option}
-                                // optionOpen={optionOpen}
                                 onSelect={onSelect}
-                                // showOption={showOption}
                               />
                             );
                           })}
@@ -104,18 +111,6 @@ const ProductDetail = () => {
               })}
             </ul>
 
-            {/* <ul className="buy-list-box">
-              {optionDetail.map(option => {
-                return option.id === orderListIndex ? (
-                  <ProductOrderModal
-                    key={option.id}
-                    option={optionDetail[orderListIndex]}
-                    // removeOrder={removeOrder}
-                    // handleOption={handleOption}
-                  />
-                ) : null;
-              })}
-            </ul> */}
             <div className="total-price-box">
               <dl className="total-price">
                 <dt>총 금액</dt>
@@ -131,15 +126,17 @@ const ProductDetail = () => {
           </div>
         </div>
         <div className="detail-des">
-          <div className="datail-tab-wrap">
+          <div className="detail-tab-wrap">
             <ul className="detail-tab">
-              <li>상품정보</li>
-              <li>기본정보</li>
-              <li>상품후기</li>
+              <ProductDes />
             </ul>
           </div>
           <article className="detail-body">
-            <h1>상세정보 올 자리</h1>
+            {productDetail.map(info => {
+              return <ProductInfoTab key={info.id} info={info} />;
+            })}
+            <ProductInfoTab />
+            {/* <h1>상세정보 올 자리</h1> */}
           </article>
         </div>
       </div>
