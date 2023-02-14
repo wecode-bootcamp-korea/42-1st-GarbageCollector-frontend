@@ -103,7 +103,7 @@ const Cart = () => {
                   type="checkbox"
                   name="select-all"
                   onChange={e => handleAllCheck(e.target.checked)}
-                  checked={isCheckedBtnAll ? true : false}
+                  checked={isCheckedBtnAll}
                 />
 
                 <span for="chkbox" className="all-select-list">
