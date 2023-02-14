@@ -9,13 +9,13 @@ const Nav = () => {
   const [navRightLists, setNavRightLists] = useState([]);
 
   useEffect(() => {
-    fetch('./data/navCategory.json')
+    fetch('/data/navCategory.json')
       .then(response => response.json())
       .then(data => setNavCategories(data));
   }, []);
 
   useEffect(() => {
-    fetch('./data/navRightWrap.json')
+    fetch('/data/navRightWrap.json')
       .then(response => response.json())
       .then(data => setNavRightLists(data));
   }, []);
@@ -24,7 +24,7 @@ const Nav = () => {
     <nav>
       <div className="navWrap">
         <Link to="#" />
-        <img className="logo" src="/images/logo.png" alt="로고" />
+        <img className="logo" src="/images/newLogo.png" alt="로고" />
         <ul className="categorywrap">
           {navCategories.map(navcategory => {
             return (
