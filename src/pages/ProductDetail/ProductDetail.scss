@@ -17,6 +17,7 @@
     .detail-header {
       display: flex;
       align-items: center;
+      justify-content: center;
       overflow: hidden;
 
       header {
@@ -174,6 +175,7 @@
     }
     .detail-des {
       position: relative;
+      width: 100%;
       margin-top: 50px;
 
       .detail-tab-wrap {
@@ -190,6 +192,11 @@
           border-bottom: 1px solid #ddd;
           cursor: pointer;
         }
+      }
+      .detail-body {
+        position: block;
+        padding-top: 80px;
+        text-align: center;
       }
     }
   }

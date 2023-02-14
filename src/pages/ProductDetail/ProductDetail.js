@@ -9,7 +9,7 @@ const ProductDetail = () => {
   const [optionOpen, setOptionOpen] = useState(false);
   const [optionDetail, setOptionDetail] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [productDetail, setProductDetail] = useState([]);
+  const [productDetailPic, setProductDetailPic] = useState([]);
 
   const showOption = () => {
     setOptionOpen(!optionOpen);
@@ -39,7 +39,7 @@ const ProductDetail = () => {
   useEffect(() => {
     fetch('/data/productInfo.json')
       .then(response => response.json())
-      .then(data => setProductDetail(data));
+      .then(data => setProductDetailPic(data));
   }, []);
 
   return (
@@ -131,13 +131,13 @@ const ProductDetail = () => {
               <ProductDes />
             </ul>
           </div>
-          <article className="detail-body">
-            {productDetail.map(info => {
-              return <ProductInfoTab key={info.id} info={info} />;
-            })}
-            <ProductInfoTab />
-            {/* <h1>상세정보 올 자리</h1> */}
-          </article>
+          <section className="detail-body">
+            <ul>
+              {productDetailPic.map(info => {
+                return <ProductInfoTab key={info.id} info={info} />;
+              })}
+            </ul>
+          </section>
         </div>
       </div>
       <div className="how-about-this">
