@@ -81,31 +81,26 @@ const ProductDetail = () => {
               );
             })}
 
-            <section className="product-buy-section">
-              <div className="product-buy-content">
-                <div className="product-buy-wrap">
-                  <div className="buy-list-box">
-                    <div className="buy-list-option">
-                      <button className="option-btn" onClick={showOption}>
-                        옵션
-                      </button>
-                      <div className="option-box">
-                        {optionOpen &&
-                          optionDetail.map(option => {
-                            return (
-                              <ProductDetailModal
-                                key={option.id}
-                                option={option}
-                                onSelect={onSelect}
-                              />
-                            );
-                          })}
-                      </div>
-                    </div>
-                  </div>
+            <div className="buy-list-box">
+              <div className="buy-list-option">
+                <button className="option-btn" onClick={showOption}>
+                  옵션
+                </button>
+                <div className="option-box">
+                  {optionOpen &&
+                    optionDetail.map(option => {
+                      return (
+                        <ProductDetailModal
+                          key={option.id}
+                          option={option}
+                          onSelect={onSelect}
+                        />
+                      );
+                    })}
                 </div>
               </div>
-            </section>
+            </div>
+
             <ul className="buy-list-box">
               {selectedOptions.map(option => {
                 return (
