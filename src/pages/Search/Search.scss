@@ -1,0 +1,109 @@
+.searchBarContainer {
+  visibility: visible;
+  position: fixed;
+  width: 100%;
+  max-height: 100%;
+  overflow-y: scroll;
+  transition: top 0.5s ease 0s, visibility 0.3s ease 0s;
+  background-color: rgb(255, 255, 255);
+
+  // &.action {
+  //   z-index: 100;
+  //   top: 0px;
+  //   height: 100%;
+  // }
+
+  // &.base {
+  //   z-index: 0;
+  //   top: -500px;
+  // }
+
+  .searchBarWrapper {
+    position: relative;
+    min-width: 600px;
+    max-width: 1440px;
+    margin: 0px auto;
+    padding: 102px 0px 80px;
+
+    .searchResultContainer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 50px 200px;
+      text-align: center;
+
+      .searchResult {
+        position: relative;
+        margin: 20px 20px;
+
+        img {
+          @include size(200px, 200px);
+        }
+
+        .lastImg {
+          position: absolute;
+          z-index: -1;
+          top: 0;
+          left: 0;
+          transition: all 0.3s ease-in;
+          opacity: 0;
+        }
+
+        h2 {
+          padding-top: 15px;
+          color: #2ac1bc;
+          font-size: 18px;
+        }
+      }
+
+      .searchResult:hover {
+        .lastImg {
+          z-index: 1;
+          opacity: 1;
+        }
+      }
+
+      .searchBarRecentContainer {
+        @include commonDisplayAttributes(flex, center, null);
+        width: 800px;
+        transform: translateX(11%);
+
+        .searchBarRecentItems {
+          padding-top: 80px;
+          font-family: 'BMDOHYEON';
+
+          h3 {
+            font-size: 32px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .searchBarHeader {
+    @include commonDisplayAttributes(flex, null, center);
+    position: relative;
+    width: 600px;
+    margin: 0 auto;
+
+    input {
+      @include size(100%, 60px);
+      border: none;
+      border-bottom: 2px solid #000;
+      outline: none;
+      font-family: 'BMJUA';
+      font-size: 20px;
+    }
+
+    input::placeholder {
+      color: #c4c4c4;
+    }
+  }
+
+  .fa-xmark {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    cursor: pointer;
+  }
+}
