@@ -16,7 +16,7 @@
     justify-content: center;
 
     margin-top: 65px;
-    .main-left {
+    .cart-left {
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
       padding: 10px;
@@ -41,36 +41,6 @@
           position: absolute;
           top: 3px;
         }
-
-        // input[type='checkbox'] {
-        //   height: 20px;
-        //   position: absolute;
-        //   left: -3000%;
-        // }
-
-        // input[id='chkbox'] + label:before {
-        //   content: '';
-        //   display: inline-block;
-        //   width: 20px;
-        //   height: 20px;
-        //   border: 1px solid #a6a6a6;
-        //   margin-right: 5px;
-        //   position: relative;
-        //   vertical-align: middle;
-        //   border-radius: 3px;
-        //   transition: all 0.5s;
-        // }
-        // //
-        // input[id='chkbox']:checked + label:before {
-        //   background: #d392ff;
-        //   border-color: #d392ff;
-        // }
-        // input[id='chkbox']:checked + label:after {
-        //   contet: '';
-        //   // background: url(images/check.png) no-repeat;
-        //   width: 10px;
-        //   height: 10px;
-        // }
 
         .select-delete {
           margin-bottom: 0;
@@ -103,14 +73,14 @@
           align-items: center;
           .item-name {
             margin-left: 5px;
-            // border: 1px solid black;
+
             width: 430px;
             height: 120px;
             display: flex;
             align-items: center;
             .product-img {
               width: 100px;
-              margin: 0px 30px 0px 30px;
+              margin: 0px 30px;
             }
           }
           .price-and-delete {
@@ -118,23 +88,7 @@
             text-align: end;
             .delete-btn {
               width: 25px;
-              margin: 0px 5px 0px 5px;
-              text-align: center;
-              border: lightgrey;
-              border-radius: 5px;
-              height: 25px;
-              background-color: white;
-              color: #bfbfbf;
-              cursor: pointer;
-            }
-          }
-
-          .price-and-delete {
-            width: 125px;
-            text-align: end;
-            .delete-btn {
-              width: 25px;
-              margin: 0px 5px 0px 5px;
+              margin: 0px 5px;
               text-align: center;
               border: lightgrey;
               border-radius: 5px;
@@ -169,12 +123,12 @@
         font-size: medium;
       }
     }
-    .main-right {
+    .cart-right {
       border-left: 1px solid #ddd;
       height: auto;
       width: 325px;
       padding-left: 25px;
-      // text-align: center;
+
       position: relative;
       .purchase {
         border-top: 1px solid #ddd;
@@ -186,7 +140,7 @@
           height: 105px;
           border-bottom: 1px solid #ddd;
           display: flex;
-          // align-items: center;
+
           flex-direction: column;
           padding: 15px;
 
@@ -206,8 +160,7 @@
         .estimated-amount {
           height: 75px;
           margin-top: 10px;
-          // display: flex;
-          // align-items: center;
+
           padding: 15px;
           color: #d392ff;
           display: flex;
@@ -221,7 +174,7 @@
         border: none;
         border-radius: 10px;
         font-size: 18px;
-        // transition: background 0.1s ease-in-out;
+
         background-color: #d392ff;
         color: white;
         opacity: 1;

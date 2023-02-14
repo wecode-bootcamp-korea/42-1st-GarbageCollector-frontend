@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CartItems from './CartItems';
 import './Cart.scss';
 
 const Cart = () => {
   const [productList, setProductList] = useState([]);
   const [isAllCheck, setIsAllCheck] = useState([]);
+
+  const isCheckedBtnAll = productList.length === isAllCheck.length;
 
   useEffect(() => {
     fetch('/data/cart.json', {
@@ -48,7 +49,7 @@ const Cart = () => {
     (acc, curr) => acc + curr.quantity * curr.productTotalPrice,
     0
   );
-  const isDisabled = productList.length === 0 ? true : false;
+  const isDisabled = productList.length === 0;
 
   const handleSingleCheck = (checked, id) => {
     if (checked) {
@@ -94,7 +95,7 @@ const Cart = () => {
         </div>
 
         <div className="cart-center">
-          <div className="main-left">
+          <div className="cart-left">
             <div className={isDisplayNone}>
               <div>
                 <input
@@ -102,9 +103,7 @@ const Cart = () => {
                   type="checkbox"
                   name="select-all"
                   onChange={e => handleAllCheck(e.target.checked)}
-                  checked={
-                    productList.length === isAllCheck.length ? true : false
-                  }
+                  checked={isCheckedBtnAll ? true : false}
                 />
 
                 <span for="chkbox" className="all-select-list">
@@ -139,7 +138,7 @@ const Cart = () => {
             )}
           </div>
 
-          <div className="main-right">
+          <div className="cart-right">
             <div className="purchase">
               <div className="price-box">
                 <div className="total-price">
