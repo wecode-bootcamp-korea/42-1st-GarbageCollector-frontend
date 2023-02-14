@@ -12,8 +12,6 @@
   padding: 80px 0 200px 0;
 
   .detail-wrap {
-    border: 1px solid orange;
-
     .detail-header {
       display: flex;
       align-items: center;
@@ -187,6 +185,7 @@
 
         .detail-tab {
           display: flex;
+          justify-content: center;
           height: 100%;
           border-top: 1px solid #ddd;
           border-bottom: 1px solid #ddd;
@@ -194,9 +193,9 @@
         }
       }
       .detail-body {
-        position: block;
+        // position: block;
         padding-top: 80px;
-        text-align: center;
+        // text-align: start;
       }
     }
   }

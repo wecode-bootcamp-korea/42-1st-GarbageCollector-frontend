@@ -3,6 +3,9 @@ import ProductDetailModal from './ProductDetailModal';
 import ProductOrderModal from './ProductOrderModal';
 import ProductDes from './ProductDes';
 import ProductInfoTab from './ProductInfoTab';
+import ProductReview from './ProductReview';
+import ProductBasicInfo from './ProductBasicInfo';
+import ProductRec from './ProductRec';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
@@ -65,14 +68,19 @@ const ProductDetail = () => {
           </div>
 
           <div className="detail-for-order">
-            <dl className="shipping-guide">
-              <dt>배송정보</dt>
-              <dd>
-                3,000원 (30,000원 이상 구매 시 무료)
-                <br />
-                오후 1시 당일배송마감
-              </dd>
-            </dl>
+            {SHIPPING_GUIDE.map(shipping => {
+              return (
+                <dl key={shipping.id} className="shipping-guide">
+                  <dt>{shipping.topic}</dt>
+                  <dd>
+                    {shipping.text}
+                    <br />
+                    {shipping.text2}
+                  </dd>
+                </dl>
+              );
+            })}
+
             <section className="product-buy-section">
               <div className="product-buy-content">
                 <div className="product-buy-wrap">
@@ -137,14 +145,25 @@ const ProductDetail = () => {
                 return <ProductInfoTab key={info.id} info={info} />;
               })}
             </ul>
+            <ProductBasicInfo />
+            <ProductReview />
           </section>
         </div>
       </div>
-      <div className="how-about-this">
-        <h3>이건어때요 올 자리</h3>
+      <div>
+        <ProductRec />
       </div>
     </div>
   );
 };
 
 export default ProductDetail;
+
+const SHIPPING_GUIDE = [
+  {
+    id: 1,
+    topic: '배송정보',
+    text: '3,000원 (30,000원 이상 구매 시 무료)',
+    text2: '오후 1시 당일배송마감',
+  },
+];
