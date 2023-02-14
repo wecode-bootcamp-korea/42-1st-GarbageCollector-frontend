@@ -21,8 +21,8 @@ const Footer = () => {
             {infoList.map(info => {
               return <li key={info.id}>{info.text}&nbsp;</li>;
             })}
-            <p>© ㅋㅋㅋ Corp. All rights reserved</p>
           </div>
+          <p className="copyright">© ㅋㅋㅋ Corp. All rights reserved</p>
         </div>
       </div>
     </div>
