@@ -11,7 +11,7 @@ const CheckoutList = props => {
             <span className="product-name">{product.productName}</span>
             <span className="product-option">{product.productOption}</span>
           </span>
-          <span className="price-and-delete">{product.quantity} 개</span>
+          <span className="product-quantity">{product.quantity} 개</span>
         </div>
       </div>
     </div>

@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import CheckoutList from './CheckoutList';
 import './Checkout.scss';
+import UserInfo from './UserInfo';
 
 const Checkout = () => {
   const [productList, setProductList] = useState([]);
   const [isAllCheck, setIsAllCheck] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
+  const [inputs, setInputs] = useState({
+    userName: '',
+    userPw: '',
+    userAddress: '',
+    userComment: '',
+  });
 
   useEffect(() => {
     fetch('/data/checkout.json', {
@@ -13,6 +22,22 @@ const Checkout = () => {
       .then(res => res.json())
       .then(data => setProductList(data));
   }, []);
+  const onChangeInput = e => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const onClickSubmitInfo = () => {
+    setUserInfo([...userInfo, inputs]);
+    setInputs({ userName: '', userPw: '', userAddress: '', userComment: '' });
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleAllCheck = checked => {
     if (checked) {
@@ -29,21 +54,23 @@ const Checkout = () => {
     0
   );
 
+  const totalDiscount = productList.reduce((accur, current) => {
+    return accur + current.discountPrice;
+  }, 0);
+
   const totalCost =
     productList[0] && typeof productList[0].deliverFee === 'number'
       ? (
           productList[0].deliverFee +
           totalAmount -
-          productList[0].discountPrice
+          totalDiscount
         ).toLocaleString()
       : '0';
 
-  //
-  // 멘토님께 물어봐야 함
   const discountPrice =
     productList[0] && typeof productList[0].discountPrice === 'number'
       ? (
-          productList[0].discountPrice + productList[1].discountPrice
+          productList[0].discountPrice + productList[0].discountPrice
         ).toLocaleString()
       : '0';
 
@@ -51,35 +78,57 @@ const Checkout = () => {
   //
 
   return (
-    <div className="cart">
+    <div className="checkout">
       <main>
-        <div className="cart-title">
+        <div className="checkout-title">
           <h3>주문서</h3>
         </div>
 
-        <div className="cart-center">
-          <div className="main-left">
+        <div className="checkout-center">
+          <div className="checkout-left">
             <div className="ship-title">배송지</div>
             <div className="shipping">
-              <button className="ship-address">배송지 등록하기</button>
+              <div>
+                {userInfo.map((comm, index) => (
+                  <div key={index}>
+                    <p>{comm.userName}</p>
+                    <p>{comm.userPw}</p>
+                    <p>{comm.userAddress}</p>
+                    <p>{comm.userComment}</p>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <div
+                  style={{ display: userInfo.length > 0 ? 'none' : 'block' }}
+                >
+                  <button className="ship-address" onClick={handleOpenModal}>
+                    배송지 등록하기
+                  </button>
+                </div>
+
+                <div className={isModalOpen ? 'modal open' : 'modal'}>
+                  <UserInfo
+                    inputs={inputs}
+                    onChangeInput={onChangeInput}
+                    onClickSubmitInfo={onClickSubmitInfo}
+                    onCloseModal={handleCloseModal}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="check-all">주문상품</div>
+            <div className="order-product">주문상품</div>
 
             <div>
               {productList.length === 0 ? (
-                <div className="empty-cart">
-                  <img
-                    className="empty-img"
-                    alt="empty"
-                    src="images/emptyImg.jpg"
-                  />
-                </div>
+                <div className="empty-product" />
               ) : (
                 productList.map(product => (
                   <CheckoutList key={product.cartId} product={product} />
                 ))
               )}
             </div>
+
             <div className="payment-method">
               <span>결제수단</span>
             </div>
@@ -113,7 +162,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="main-right">
+          <div className="checkout-right">
             <div className="purchase">
               <div className="price-box">
                 <div className="total-price">
