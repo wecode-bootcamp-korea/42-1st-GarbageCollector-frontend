@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavAside from './NavAside';
+import './NavRightWrap.scss';
 
 const NavRightWrap = ({ navrighticon }) => {
   const {
@@ -34,7 +35,7 @@ const NavRightWrap = ({ navrighticon }) => {
       <button onClick={showMoreInfo} className="moreInfoBtn">
         <img className="moreInfoIcon" src={moreInfoIcon} alt={moreIncoAlt} />
       </button>
-      {asideOpen && <NavAside />}
+      {asideOpen && <NavAside showMoreInfo={showMoreInfo} />}
     </li>
   );
 };

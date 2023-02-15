@@ -4,13 +4,11 @@ import NavBeforeLog from './NavBeforeLog';
 import NavAfterLog from './NavAfterLog';
 import './NavAside.scss';
 
-const NavAside = () => {
+const NavAside = ({ showMoreInfo }) => {
   return (
-    <>
-      <div className="aside-wrap" />
+    <div className="aside-wrap">
       <NavBeforeLog />
       <NavAfterLog />
-
       <nav className="aside-nav">
         <h2 className="sort">카테고리</h2>
         <ul className="aside-ul">
@@ -23,7 +21,6 @@ const NavAside = () => {
           })}
         </ul>
       </nav>
-
       <footer className="aside-footer">
         <div className="footer-wrap">
           <img
@@ -41,8 +38,8 @@ const NavAside = () => {
           </ul>
         </div>
       </footer>
-      <button>X</button>
-    </>
+      <button onClick={showMoreInfo}>X</button>
+    </div>
   );
 };
 

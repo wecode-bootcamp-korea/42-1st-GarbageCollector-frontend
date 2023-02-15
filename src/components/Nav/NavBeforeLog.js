@@ -7,7 +7,9 @@ const NavBeforeLog = () => {
     <header>
       <h2 className="aside-title">
         앗! <br />
-        <Link to="#">로그인이 필요해요</Link>
+        <Link to="#" className="aside-title">
+          로그인이 필요해요
+        </Link>
       </h2>
     </header>
   );
