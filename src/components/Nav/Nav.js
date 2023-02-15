@@ -24,7 +24,7 @@ const Nav = () => {
     <nav>
       <div className="navWrap">
         <Link to="#" />
-        <img className="logo" src="/images/logo.png" alt="로고" />
+        <img className="logo" src="/images/newLogo.png" alt="로고" />
         <ul className="categorywrap">
           {navCategories.map(navcategory => {
             return (
