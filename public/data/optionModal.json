@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "optionName": "수영은하게 해줘라 ~",
+    "productOptionName": "수영은하게 해줘라 ~",
     "extraPrice": 0,
     "cartId": 0,
     "quantity": 100000,
@@ -9,7 +9,7 @@
   },
   {
     "id": 1,
-    "optionName": "그래도 한잔해야제 ~ (+20,000원)",
+    "productOptionName": "그래도 한잔해야제 ~ (+20,000원)",
     "extraPrice": 20000,
     "cartId": 1,
     "quantity": 100000,
@@ -17,7 +17,7 @@
   },
   {
     "id": 2,
-    "optionName": "왔으니까 자고가보자 (+150,000원)",
+    "productOptionName": "왔으니까 자고가보자 (+150,000원)",
     "extraPrice": 150000,
     "cartId": 2,
     "quantity": 100000,

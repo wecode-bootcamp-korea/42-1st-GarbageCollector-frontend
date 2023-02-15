@@ -17,7 +17,7 @@ const ProductDetailModal = props => {
     <ul value={option.id} onClick={getOption} className="option-ul">
       <li onClick={handleOption}>
         <button onClick={showOption} value={option.id} className="option-list">
-          {option.optionName}
+          {option.productOptionName}
         </button>
       </li>
     </ul>
