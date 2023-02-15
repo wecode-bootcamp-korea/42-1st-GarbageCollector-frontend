@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './Carousel.scss';
+import './BannerCarousel.scss';
 
-const Carousel = () => {
+const BannerCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideList, setSlideList] = useState([]);
   const [action, setAction] = useState(1);
@@ -9,7 +9,7 @@ const Carousel = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
 
   useEffect(() => {
-    fetch('data/carousel.json')
+    fetch('data/banner.json')
       .then(response => response.json())
       .then(data => {
         setDataFromServer(data);
@@ -68,7 +68,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="carousel">
+    <div className="banner-carousel">
       <ul
         className="slide-list"
         style={{
@@ -100,4 +100,4 @@ const Carousel = () => {
     </div>
   );
 };
-export default Carousel;
+export default BannerCarousel;
