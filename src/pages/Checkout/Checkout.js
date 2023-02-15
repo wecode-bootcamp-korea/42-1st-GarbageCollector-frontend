@@ -50,7 +50,7 @@ const Checkout = () => {
   };
 
   const totalAmount = productList.reduce(
-    (acc, curr) => acc + curr.quantity * curr.productTotalPrice,
+    (acc, curr) => acc + curr.quantity * curr.productPriceBeforeDiscount,
     0
   );
 
@@ -59,9 +59,9 @@ const Checkout = () => {
   }, 0);
 
   const totalCost =
-    productList[0] && typeof productList[0].deliverFee === 'number'
+    productList[0] && typeof productList[0].deliveryFee === 'number'
       ? (
-          productList[0].deliverFee +
+          productList[0].deliveryFee +
           totalAmount -
           totalDiscount
         ).toLocaleString()
@@ -175,7 +175,7 @@ const Checkout = () => {
                 </div>
                 <div className="delivery-fee">
                   <p>배송비</p>
-                  <p>+{productList[0]?.deliverFee} 원</p>
+                  <p>+{productList[0]?.deliveryFee} 원</p>
                 </div>
               </div>
 
