@@ -24,6 +24,7 @@
         margin-bottom: 10px;
       }
       .shipping {
+        // border: 1px solid red;
         border-top: 1px solid black;
         padding: 20px 0px;
         justify-content: center;
@@ -297,7 +298,7 @@
 
 .modal-x-btn {
   position: absolute;
-  top: 32%;
+  top: 27%;
   right: 37.5%;
   border: none;
   font-size: 30px;
@@ -323,4 +324,18 @@
 .modal-essential {
   color: #d392ff;
   font-size: 18px;
+}
+
+.info-of-user {
+  color: #777777;
+  font-size: 14px;
+  position: absolute;
+  margin-right: 600px;
+  margin-top: -14px;
+}
+
+.user-name {
+  margin-bottom: 5px;
+  color: black;
+  font-size: 16px;
 }

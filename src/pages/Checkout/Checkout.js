@@ -88,13 +88,13 @@ const Checkout = () => {
           <div className="checkout-left">
             <div className="ship-title">배송지</div>
             <div className="shipping">
-              <div>
+              <div className="info-of-user">
                 {userInfo.map((comm, index) => (
                   <div key={index}>
-                    <p>{comm.userName}</p>
-                    <p>{comm.userPw}</p>
-                    <p>{comm.userAddress}</p>
-                    <p>{comm.userComment}</p>
+                    <p className="user-name">{comm.userName}</p>
+                    <p calssName="user-pw">{comm.userPw}</p>
+                    <p calssName="user-address">{comm.userAddress}</p>
+                    <p calssName="user-comment">[{comm.userComment}]</p>
                   </div>
                 ))}
               </div>
