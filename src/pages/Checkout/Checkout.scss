@@ -1,2 +1,312 @@
-// .checkout {
-// }
+.cart {
+  padding: 80px 0px 200px;
+
+  // border: 1px solid red;
+
+  .cart-title {
+    padding-bottom: 20px;
+    // border: 1px solid blue;
+    height: 100px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .cart-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    // border: 1px solid blue;
+
+    .main-left {
+      // border: 1px solid red;
+      // border-top: 1px solid #ddd;
+      // border-bottom: 1px solid #ddd;
+      // padding: 10px;
+      margin-right: 30px;
+      // border: 1px solid green;
+
+      // .check-all-display-none {
+      //   display: none;
+      // }
+      .check-all {
+        border-bottom: 1px solid black;
+        display: flex;
+        width: 700px;
+        height: 32px;
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 50px;
+        margin-bottom: 0px;
+
+        .all-select-list {
+          color: #777;
+
+          font-size: 14px;
+          position: absolute;
+          top: 3px;
+        }
+      }
+      .empty-cart {
+        height: 350px;
+        width: 630px;
+      }
+      .empty-img {
+        margin: 30px 0px 0px 30px;
+      }
+      .cart-item-container {
+        margin-top: 0px;
+        border-top: 1px solid #ddd;
+        display: flex;
+        height: auto;
+        width: 700px;
+
+        .product-info {
+          // border: 1px solid blue;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          // 보라카이 가서 한잔
+          .item-name {
+            margin-left: 5px;
+            // border: 1px solid black;
+            width: 430px;
+            height: 60px;
+            display: flex;
+            padding-top: 20px;
+            flex-direction: column;
+            font-size: 14px;
+            // .product-img {
+            //   width: 100px;
+            //   margin: 0px 30px 0px 30px;
+            // }
+          }
+          .price-and-delete {
+            width: 125px;
+            text-align: end;
+            color: #777777;
+            font-weight: 500;
+            font-size: 16px;
+            .delete-btn {
+              width: 25px;
+              margin: 0px 5px 0px 5px;
+              text-align: center;
+              border: lightgrey;
+              border-radius: 5px;
+              height: 25px;
+              background-color: white;
+              color: #bfbfbf;
+              cursor: pointer;
+            }
+          }
+
+          .price-and-delete {
+            width: 125px;
+            text-align: end;
+            .delete-btn {
+              width: 25px;
+              margin: 0px 5px 0px 5px;
+              text-align: center;
+              border: lightgrey;
+              border-radius: 5px;
+              height: 25px;
+              background-color: white;
+              color: #bfbfbf;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+    .main-right {
+      border: 1px solid #ddd;
+      background-color: #f8f8f8;
+      height: 410px;
+      width: 324px;
+      padding-left: 25px;
+      position: sticky;
+      top: 235px;
+
+      .purchase {
+        border-bottom: 1px solid #ddd;
+        height: 230px;
+        width: 300px;
+        position: sticky;
+
+        .price-box {
+          margin-top: 5px;
+          height: 120px;
+          border-bottom: 1px solid #ddd;
+          display: flex;
+
+          flex-direction: column;
+          padding: 15px;
+
+          .total-price {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+          }
+
+          .delivery-fee {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+          }
+        }
+        .estimated-amount {
+          height: 75px;
+          padding: 15px;
+          color: black;
+          display: flex;
+          justify-content: space-between;
+
+          .total-price-word {
+            font-size: 16px;
+          }
+          .total-price-num {
+            position: relative;
+            bottom: 6px;
+            font-size: 20px;
+            font-weight: 700;
+          }
+        }
+      }
+      .consent {
+        padding: 1px;
+        margin-top: 10px;
+        display: flex;
+        .purchase-consent {
+          font-size: 13px;
+          margin-left: 10px;
+        }
+      }
+
+      .purchase-btn {
+        margin-top: 25px;
+        width: 300px;
+        height: 55px;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        background-color: #d392ff;
+        color: white;
+        opacity: 1;
+        cursor: pointer;
+      }
+      .purchase-btn:hover {
+        box-shadow: 300px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+      }
+    }
+  }
+}
+
+.shipping {
+  border-top: 1px solid black;
+  padding: 20px 0px;
+  justify-content: center;
+  display: flex;
+}
+
+.ship-title {
+  // border: 1px solid red;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: -35px;
+  margin-bottom: 10px;
+}
+
+// 배송지 등록하기 버튼
+.ship-address {
+  border: none;
+  width: 328px;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: #d392ff;
+  color: white;
+  cursor: pointer;
+}
+.ship-address:hover {
+  box-shadow: 328px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.product-name {
+  font-weight: 500;
+}
+
+.product-option {
+  font-weight: 400;
+  color: #777777;
+  margin-top: 4px;
+}
+
+.payment-method {
+  border-bottom: 1px solid black;
+  display: flex;
+  width: 700px;
+  height: 32px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+.agree-term {
+  border-bottom: 1px solid black;
+  display: flex;
+  width: 700px;
+  height: 32px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+.user-point {
+  margin-top: 15px;
+}
+
+.check-agree {
+  margin-top: 15px;
+}
+
+.use-point {
+  font-weight: 600;
+}
+
+.checkout-end {
+  // border: 1px solid red;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-end-btn {
+  margin-top: 25px;
+  border: none;
+  width: 328px;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: #d392ff;
+  color: white;
+  cursor: pointer;
+}
+
+.checkout-end-btn:hover {
+  box-shadow: 328px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.cart-right {
+  border: 1px solid green;
+}
+
+.discout-price {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-top: -15px;
+  color: #777777;
+}
