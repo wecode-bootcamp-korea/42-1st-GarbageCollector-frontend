@@ -2,11 +2,12 @@ import React from 'react';
 import './ProductDetailModal.scss';
 
 const ProductDetailModal = props => {
-  const { option, onSelect, showOption, handleOption } = props;
+  const { option, onSelect, showOption } = props;
+
+  const optionId = option.productOptionId;
 
   const getOption = e => {
     const selectedId = Number(e.target.value);
-    const optionId = option.id;
 
     if (selectedId === optionId) {
       onSelect(option);
@@ -14,9 +15,9 @@ const ProductDetailModal = props => {
   };
 
   return (
-    <ul value={option.id} onClick={getOption} className="option-ul">
-      <li onClick={handleOption}>
-        <button onClick={showOption} value={option.id} className="option-list">
+    <ul value={optionId} onClick={getOption} className="option-ul">
+      <li>
+        <button onClick={showOption} value={optionId} className="option-list">
           {option.productOptionName}
         </button>
       </li>

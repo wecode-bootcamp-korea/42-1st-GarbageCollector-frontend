@@ -6,56 +6,104 @@ import ProductInfoTab from './ProductInfoTab';
 import ProductReview from './ProductReview';
 import ProductBasicInfo from './ProductBasicInfo';
 import ProductRec from './ProductRec';
+import { GET_PRODUCT_DETAIL } from '../../config';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [optionOpen, setOptionOpen] = useState(false);
   const [optionDetail, setOptionDetail] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [productDetailPic, setProductDetailPic] = useState([]);
+  const [totalPrice, setTotalPrice] = useState('');
+  const { price, discountPrice, productName, productOptions } = optionDetail;
+
+  const discount = Math.floor(Number((price - discountPrice) / price) * 100);
+
+  const getNumber = str => {
+    return Number(str);
+  };
+
+  const addOptionPrice = amount => {
+    if (amount === 0) return;
+    if (typeof totalPrice === 'string') {
+      setTotalPrice(
+        getNumber(
+          Number(totalPrice.replace(',', '')) + Number(amount.replace(',', ''))
+        )
+      );
+    } else {
+      setTotalPrice(
+        getNumber(Number(totalPrice) + Number(amount.replace(',', '')))
+      );
+    }
+  };
 
   const showOption = () => {
     setOptionOpen(!optionOpen);
   };
-
   const onSelect = option => {
     setSelectedOptions(prevState => {
       const set = new Set([...prevState, option]);
       return [...set];
     });
+
     setOptionOpen(false);
   };
 
   const removeOrder = id => {
     const updatedSelectedOptions = selectedOptions.filter(
-      option => option.id !== id
+      option => option.productOptionId !== id
     );
     setSelectedOptions(updatedSelectedOptions);
   };
-
   useEffect(() => {
-    fetch('/data/optionModal.json')
+    fetch(`${GET_PRODUCT_DETAIL}/products/13`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
       .then(response => response.json())
-      .then(data => setOptionDetail(data));
+      .then(({ data }) => {
+        setOptionDetail(data[0]);
+        setIsLoading(false);
+      });
   }, []);
 
-  useEffect(() => {
-    fetch('/data/productInfo.json')
-      .then(response => response.json())
-      .then(data => setProductDetailPic(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${GET_PRODUCT_DETAIL}/products/12`, {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' },
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setProductDetailPic(data[0]);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   fetch('/data/productInfo.json')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setProductDetailPic(data);
+  //     });
+  // }, []);
+
+  const convertAmount = amount => {
+    return Math.floor(amount).toLocaleString();
+  };
+
+  if (isLoading) return null;
 
   return (
     <div className="detail-container">
       <div className="detail-wrap">
         <div className="detail-header">
           <header className="detail-product-info">
-            <span className="product-discount-badge">할인율% SALE</span>
-            <h3 className="product-name">
-              보라카이 가서 투명한 바다볼사람. 보기만하는거임
-            </h3>
+            <span className="product-discount-badge">{discount} % SALE</span>
+            <h3 className="product-name">{productName}</h3>
             <p className="product-price">
-              <del>900,000원</del>750,000원
+              <del>{convertAmount(price)}원</del>
+              {convertAmount(discountPrice)}원
             </p>
           </header>
 
@@ -88,12 +136,13 @@ const ProductDetail = () => {
                 </button>
                 <div className="option-box">
                   {optionOpen &&
-                    optionDetail.map(option => {
+                    productOptions.map(option => {
                       return (
                         <ProductDetailModal
-                          key={option.id}
+                          key={option.productOptionId}
                           option={option}
                           onSelect={onSelect}
+                          showOption={showOption}
                         />
                       );
                     })}
@@ -105,10 +154,14 @@ const ProductDetail = () => {
               {selectedOptions.map(option => {
                 return (
                   <ProductOrderModal
-                    key={option.id}
+                    key={option.productOptionId}
                     option={option}
                     removeOrder={removeOrder}
                     selectedOptions={selectedOptions}
+                    price={price}
+                    convertAmount={convertAmount}
+                    discountPrice={discountPrice}
+                    addOptionPrice={addOptionPrice}
                   />
                 );
               })}
@@ -118,7 +171,7 @@ const ProductDetail = () => {
               <dl className="total-price">
                 <dt>총 금액</dt>
                 <dd>
-                  <span>총금액 데이터올 자리(OO원)</span>
+                  <span>{totalPrice}</span>
                 </dd>
               </dl>
               <footer className="buy-footer">
