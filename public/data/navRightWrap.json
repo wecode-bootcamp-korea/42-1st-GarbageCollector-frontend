@@ -5,7 +5,7 @@
     "searchAlt": "검색",
     "cartIcon": "/images/cart.png",
     "castAlt": "장바구니",
-    "moreInfoIcon": "images/moreInfo.png",
+    "moreInfoIcon": "/images/moreInfo.png",
     "moreIncoAlt": "더보기"
   }
 ]

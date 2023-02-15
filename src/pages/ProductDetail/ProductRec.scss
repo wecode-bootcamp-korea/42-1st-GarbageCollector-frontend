@@ -1,0 +1,17 @@
+.item-recommend {
+  position: relative;
+  margin-top: 120px;
+  padding-top: 120px;
+  border-top: 1px solid #ddd;
+
+  .rec-title {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 36px;
+    text-align: center;
+  }
+  .rec-product-wrap {
+    width: 10%;
+    margin-top: 100px;
+  }
+}

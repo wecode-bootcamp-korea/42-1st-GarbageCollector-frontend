@@ -9,13 +9,13 @@ const Nav = () => {
   const [navRightLists, setNavRightLists] = useState([]);
 
   useEffect(() => {
-    fetch('./data/navCategory.json')
+    fetch('/data/navCategory.json')
       .then(response => response.json())
       .then(data => setNavCategories(data));
   }, []);
 
   useEffect(() => {
-    fetch('./data/navRightWrap.json')
+    fetch('/data/navRightWrap.json')
       .then(response => response.json())
       .then(data => setNavRightLists(data));
   }, []);
