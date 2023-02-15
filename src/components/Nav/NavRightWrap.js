@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import NavAside from './NavAside';
 
 const NavRightWrap = ({ navrighticon }) => {
   const {
@@ -10,6 +11,10 @@ const NavRightWrap = ({ navrighticon }) => {
     moreInfoIcon,
     moreIncoAlt,
   } = navrighticon;
+
+  const showMoreInfo = () => {
+    return <NavAside />;
+  };
 
   return (
     <li className="navrights">
@@ -24,7 +29,7 @@ const NavRightWrap = ({ navrighticon }) => {
           <span className="navLogInFont">로그인</span>
         </Link>
       </div>
-      <button className="moreInfoBtn">
+      <button onClick={showMoreInfo} className="moreInfoBtn">
         <img className="moreInfoIcon" src={moreInfoIcon} alt={moreIncoAlt} />
       </button>
     </li>

@@ -22,7 +22,7 @@ const Nav = () => {
 
   return (
     <nav>
-      <div className="navWrap">
+      <div className="nav-wrap">
         <Link to="#" />
         <img className="logo" src="/images/newLogo.png" alt="로고" />
         <ul className="categorywrap">
