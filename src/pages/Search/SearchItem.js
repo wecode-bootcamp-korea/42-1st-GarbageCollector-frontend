@@ -1,18 +1,19 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-const SearchItems = ({ list, handleSearchBarOn }) => {
-  const navigate = useNavigate();
+// const SearchItems = ({ list, handleSearchBarOn }) => {
+const SearchItems = ({ list }) => {
+  // const navigate = useNavigate();
 
-  const goDetail = e => {
-    navigate(`/goods/${list.product_id}`);
-    handleSearchBarOn();
-  };
+  // const goDetail = e => {
+  //   navigate(`/goods/${list.product_id}`);
+  //   handleSearchBarOn();
+  // };
 
   return (
-    <div className="searchResult" onClick={goDetail}>
-      <img src={list.thumnail_url_1} alt="searchImg" />
-      <img className="lastImg" src={list.thumnail_url_2} alt="searchImg" />
+    // <div className="searchResult" onClick={goDetail}>
+    <div className="searchResult">
+      <img src={list.src} alt="searchImg" />
       <h2>{list.name}</h2>
     </div>
   );
