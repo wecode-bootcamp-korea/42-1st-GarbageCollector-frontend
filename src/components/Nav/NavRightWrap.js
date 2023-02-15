@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavAside from './NavAside';
 
@@ -12,8 +12,10 @@ const NavRightWrap = ({ navrighticon }) => {
     moreIncoAlt,
   } = navrighticon;
 
+  const [asideOpen, setAsideOpen] = useState(false);
+
   const showMoreInfo = () => {
-    return <NavAside />;
+    setAsideOpen(!asideOpen);
   };
 
   return (
@@ -32,6 +34,7 @@ const NavRightWrap = ({ navrighticon }) => {
       <button onClick={showMoreInfo} className="moreInfoBtn">
         <img className="moreInfoIcon" src={moreInfoIcon} alt={moreIncoAlt} />
       </button>
+      {asideOpen && <NavAside />}
     </li>
   );
 };
