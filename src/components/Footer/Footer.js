@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="footer">
       <div className="footer-inner">
         <div className="footer-logo">
-          <h2>ㅋㅋㅋ</h2>
+          <img alt="logo" src="images/newLogo.png" />
         </div>
         <div className="footer-div">
           <nav className="footer-nav">
@@ -15,14 +15,14 @@ const Footer = () => {
                 return <li key={menu.id}>{menu.text}</li>;
               })}
             </ul>
-            <p>&nbsp;@zzz_store</p>
+            <p>&nbsp;@pOOp_store</p>
           </nav>
           <div className="footer-info">
             {infoList.map(info => {
               return <li key={info.id}>{info.text}&nbsp;</li>;
             })}
           </div>
-          <p className="copyright">© ㅋㅋㅋ Corp. All rights reserved</p>
+          <p className="copyright">© pOOp Corp. All rights reserved</p>
         </div>
       </div>
     </div>
@@ -40,13 +40,13 @@ const menuList = [
 ];
 
 const infoList = [
-  { id: 0, text: '상호 : (주)ㅋㅋㅋ' },
+  { id: 0, text: '상호 : (주)스토어풉' },
   { id: 1, text: '대표 : 이해인' },
   { id: 2, text: '사업자등록번호 : 123-45-67890' },
   { id: 3, text: '통신판매업신고번호 : 2023-서울' },
   { id: 4, text: '사업자정보확인' },
   { id: 5, text: '대표번호 : 1234-5678' },
-  { id: 6, text: '이메일 : zzz@zzz.com' },
+  { id: 6, text: '이메일 : poop-infodesk@poop.com' },
   { id: 7, text: '주소 : 서울특별시 강남구 테헤란로 427' },
   { id: 8, text: '호스팅제공 : 호스트' },
 ];
