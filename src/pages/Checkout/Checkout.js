@@ -49,6 +49,9 @@ const Checkout = () => {
     }
   };
 
+  const userPoint = productList[0]?.userPoint;
+  const cartId = productList[0]?.cartId;
+  const deliveryFee = productList[0]?.deliveryFee;
   const totalAmount = productList.reduce(
     (acc, curr) => acc + curr.quantity * curr.productPriceBeforeDiscount,
     0
@@ -74,9 +77,6 @@ const Checkout = () => {
         ).toLocaleString()
       : '0';
 
-  //
-  //
-
   return (
     <div className="checkout">
       <main>
@@ -89,14 +89,16 @@ const Checkout = () => {
             <div className="ship-title">배송지</div>
             <div className="shipping">
               <div className="info-of-user">
-                {userInfo.map((comm, index) => (
-                  <div key={index}>
-                    <p className="user-name">{comm.userName}</p>
-                    <p calssName="user-pw">{comm.userPw}</p>
-                    <p calssName="user-address">{comm.userAddress}</p>
-                    <p calssName="user-comment">[{comm.userComment}]</p>
-                  </div>
-                ))}
+                {userInfo.map(
+                  ({ userName, userPw, userAddress, userComment }) => (
+                    <div key={userAddress}>
+                      <p className="user-name">{userName}</p>
+                      <p calssName="user-pw">{userPw}</p>
+                      <p calssName="user-address">{userAddress}</p>
+                      <p calssName="user-comment">[{userComment}]</p>
+                    </div>
+                  )
+                )}
               </div>
               <div>
                 <div
@@ -136,7 +138,7 @@ const Checkout = () => {
             <div className="user-point">
               <input type="checkbox" />
               <span className="use-point">포인트 사용</span>
-              <span> : ({productList[0]?.userPoint} point) </span>
+              <span> : ({userPoint} point) </span>
             </div>
 
             <div className="agree-term">
@@ -146,7 +148,7 @@ const Checkout = () => {
             <div className="check-agree">
               <input
                 type="checkbox"
-                name={productList[0]?.cartId}
+                name={cartId}
                 onChange={e => handleAllCheck(e.target.checked)}
                 checked={productList.length === isAllCheck.length}
               />
@@ -175,7 +177,7 @@ const Checkout = () => {
                 </div>
                 <div className="delivery-fee">
                   <p>배송비</p>
-                  <p>+{productList[0]?.deliveryFee} 원</p>
+                  <p>+{deliveryFee} 원</p>
                 </div>
               </div>
 
