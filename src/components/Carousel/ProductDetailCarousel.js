@@ -36,8 +36,8 @@ const ProductDetailCarousel = () => {
               transition: `opacity 0.3s`,
             }}
           >
-            {slideList.map((slide, idx) => (
-              <img key={idx} alt={slide.alt} src={slide.src} />
+            {slideList.map(slide => (
+              <img key={slide.productId} alt={slide.alt} src={slide.src} />
             ))}
           </ul>
         </div>
@@ -46,8 +46,11 @@ const ProductDetailCarousel = () => {
         </button>
       </div>
       <button className="index-button" onClick={onClickBtnIndex}>
-        {slideList.map((_, idx) => (
-          <span key={idx} className={currentIndex === idx ? 'active' : ''}>
+        {slideList.map((slide, idx) => (
+          <span
+            key={slide.productId}
+            className={currentIndex === idx ? 'active' : ''}
+          >
             {idx}
           </span>
         ))}

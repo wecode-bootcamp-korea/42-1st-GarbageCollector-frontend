@@ -37,8 +37,8 @@ const MainCarousel = () => {
             transition: `all 1s`,
           }}
         >
-          {slideList.map((slide, idx) => (
-            <li key={idx}>
+          {slideList.map(slide => (
+            <li key={slide.productId}>
               <img alt={slide.alt} src={slide.src} />
             </li>
           ))}

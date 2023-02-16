@@ -90,10 +90,10 @@ const BannerCarousel = () => {
       <button className="index-button" onClick={onClickBtnIndex}>
         {dataFromServer.map(data => (
           <span
-            key={data.id}
-            className={currentIndex === data.id ? 'active' : ''}
+            key={data.productId}
+            className={currentIndex === data.productId ? 'active' : ''}
           >
-            {data.id}
+            {data.productId}
           </span>
         ))}
       </button>
