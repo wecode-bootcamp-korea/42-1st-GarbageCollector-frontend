@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchItem from './SearchItem';
 import '../Search/Search.scss';
 
 const Search = () => {
   const [userInput, setUserInput] = useState('');
   const [filteredList, setFilteredList] = useState([]);
-  const [searchToggle, setSearchToggle] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   const onChangeInput = e => {
     setUserInput(e.target.value);
@@ -18,6 +18,7 @@ const Search = () => {
         if (userInput === '') setFilteredList([]);
         else setFilteredList(data);
       });
+    setIsSearch(true);
   };
 
   return (
@@ -34,24 +35,20 @@ const Search = () => {
             <img alt="search" src="images/search.png" />
           </button>
         </div>
-        <div className="search-result-container">
-          {/* {console.log(filteredList)} */}
-
-          {filteredList.length !== 0 ? (
-            <ul>
-              {filteredList.map(list => (
-                <li key={list.productId}>
-                  <SearchItem list={list} />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <ul className="result-none">
-              <li>띠용!</li>
-              <li>일치하는 상품이 없습니다.</li>
-            </ul>
-          )}
-        </div>
+        {filteredList.length !== 0 ? (
+          <div className="search-result-container">
+            {filteredList.map(list => (
+              <div key={list.productId}>
+                <SearchItem list={list} />
+              </div>
+            ))}
+          </div>
+        ) : isSearch ? (
+          <ul className="result-none">
+            <li>띠용!</li>
+            <li>일치하는 상품이 없습니다.</li>
+          </ul>
+        ) : null}
       </div>
     </div>
   );
