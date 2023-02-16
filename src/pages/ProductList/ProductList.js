@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Product from './Product/Product';
 import './ProductList.scss';
 
 const ProductList = () => {
   const [productList, setProductList] = useState([]);
+  const navigate = useNavigate();
+
+  const goToDetail = id => {
+    navigate(`/products/${id}`);
+  };
 
   useEffect(() => {
     fetch('http://10.58.52.135:3000/products', {
@@ -18,16 +24,22 @@ const ProductList = () => {
     <div className="product-page-container">
       <header className="product-header">
         <h2 className="product-h2">
-          전체 <sup>총 오조오억개 좀 안됨</sup>
+          {CATEGORY_TITLE[0].title}
+          <sup>{CATEGORY_TITLE[0].subTitle}</sup>
         </h2>
-        <p className="product-p">여기에 다 있지롱!</p>
+        <p className="product-p">{CATEGORY_TITLE[0].text}</p>
       </header>
-      <div className="products-box" />
-      <div className="productListWrap">
-        <div className="productList">
-          {productList.map(product => (
-            <Product key={product.productId} product={product} />
-          ))}
+      <div className="products-box">
+        <div className="productListWrap">
+          <div className="productList">
+            {productList.map(product => (
+              <Product
+                key={product.productId}
+                product={product}
+                goToDetail={goToDetail}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -45,20 +57,20 @@ const CATEGORY_TITLE = [
   },
   {
     id: 2,
-    title: '머리',
+    title: '인기상품',
     subTitle: '인싸가 되는 발걸음?',
-    text: '진짜? 안써줄꺼야!?',
+    text: '이게 인기가 있다고..?',
   },
   {
     id: 3,
-    title: '상체',
-    subTitle: '상체가 중요하지',
-    text: '입어...줄꺼지?',
+    title: '신상품',
+    subTitle: '이 아닐 수도 있음',
+    text: '왔어요~ 왔어요~ 내가왔어요~',
   },
   {
     id: 4,
-    title: '하체',
-    subTitle: '하체가 중요하지',
-    text: '하~위~~',
+    title: '콜라보레이션',
+    subTitle: '얘랑 했다고..?',
+    text: '이런게 나왔다고..?',
   },
 ];

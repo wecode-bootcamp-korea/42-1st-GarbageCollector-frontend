@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ProductDetailModal from './ProductDetailModal';
 import ProductOrderModal from './ProductOrderModal';
 import ProductDes from './ProductDes';
@@ -30,6 +31,9 @@ const ProductDetail = () => {
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjU2Nzc5NywiZXhwIjoxNjc2NjU0MTk3LCJ1c2VySWQiOjEwfQ.kBOzOAXnVdT1WO9IiOV-UiCyuyWG18J3rKsW3u1hXns'
   );
   const discount = Math.floor(Number((price - discountPrice) / price) * 100);
+
+  const params = useParams();
+  const userId = params.id;
 
   const addOptionPrice = (id, amount) => {
     setOptionPriceList({ ...optionPriceList, [id]: amount });
@@ -91,15 +95,10 @@ const ProductDetail = () => {
   };
 
   useEffect(() => {
-    fetch(
-      `${GET_PRODUCT_DETAIL}/products/13
-
-    `,
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      }
-    )
+    fetch(`${GET_PRODUCT_DETAIL}/${userId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
       .then(response => response.json())
       .then(({ data }) => {
         setOptionDetail(data[0]);
@@ -108,7 +107,7 @@ const ProductDetail = () => {
         setMainImage(data[0].mainImage);
         setProductText(data[0].description);
       });
-  }, []);
+  }, [userId]);
 
   const sendToCart = () => {
     setOptionContentList();
