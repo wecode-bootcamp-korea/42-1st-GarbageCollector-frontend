@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { config } from '../../config';
+import { config } from '../../config';
 import SearchItem from './SearchItem';
 import '../Search/Search.scss';
 
@@ -13,22 +13,12 @@ const Search = () => {
   };
 
   const onClickSearch = e => {
-    fetch('data/search.json', {})
+    fetch(`http://10.58.52.224:3000/search/?keyword=${userInput}`, {})
       .then(response => response.json())
-      .then(result => {
-        setFilteredList(result);
+      .then(({ data }) => {
+        setFilteredList(data);
       });
   };
-
-  // console.log(filteredList);
-
-  // const filterInputValue = filteredList.filter(search => {
-  //   // console.log(typeof search.name);
-  //   return (
-  //     typeof search.name === 'string' &&
-  //     (search.name.includes(userInput) || search.content.includes(userInput))
-  //   );
-  // });
 
   useEffect(() => {
     setSearchToggle(false);
@@ -43,9 +33,9 @@ const Search = () => {
   // }, [userInput]);
 
   return (
-    <div className="searchBarContainer">
-      <div className="searchBarWrapper">
-        <div className="searchBarHeader">
+    <div className="search-bar-container">
+      <div className="search-bar-wrapper">
+        <div className="search-bar-header">
           <input
             type="text"
             placeholder="검색어를 입력해주세요"
@@ -55,7 +45,7 @@ const Search = () => {
           <button onClick={onClickSearch}>1</button>
           <i className=" fa fa-light fa-magnifying-glass fa-2x" />
         </div>
-        <div className="searchResultContainer">
+        <div className="search-result-container">
           {filteredList.map(list => {
             return filteredList ? (
               <SearchItem key={list.id} list={list} />

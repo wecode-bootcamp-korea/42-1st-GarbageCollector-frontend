@@ -9,11 +9,11 @@ const SearchItems = ({ list }) => {
   //   navigate(`/goods/${list.product_id}`);
   //   handleSearchBarOn();
   // };
-
+  console.log(list.mainImage);
   return (
     // <div className="searchResult" onClick={goDetail}>
     <div className="searchResult">
-      <img src={list.src} alt="searchImg" />
+      <img src={list.mainImage} alt="searchImg" />
       <h2>{list.name}</h2>
     </div>
   );

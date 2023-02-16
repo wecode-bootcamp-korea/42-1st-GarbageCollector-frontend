@@ -1,4 +1,4 @@
-.searchBarContainer {
+.search-bar-container {
   visibility: visible;
   position: fixed;
   width: 100%;
@@ -7,31 +7,20 @@
   transition: top 0.5s ease 0s, visibility 0.3s ease 0s;
   background-color: rgb(255, 255, 255);
 
-  // &.action {
-  //   z-index: 100;
-  //   top: 0px;
-  //   height: 100%;
-  // }
-
-  // &.base {
-  //   z-index: 0;
-  //   top: -500px;
-  // }
-
-  .searchBarWrapper {
+  .search-bar-wrapper {
     position: relative;
     min-width: 600px;
     max-width: 1440px;
     margin: 0px auto;
     padding: 102px 0px 80px;
 
-    .searchResultContainer {
+    .search-result-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       padding: 50px 200px;
       text-align: center;
 
-      .searchResult {
+      .search-result {
         position: relative;
         margin: 20px 20px;
 
@@ -40,7 +29,7 @@
           height: 200px;
         }
 
-        .lastImg {
+        .last-img {
           position: absolute;
           z-index: -1;
           top: 0;
@@ -56,21 +45,21 @@
         }
       }
 
-      .searchResult:hover {
-        .lastImg {
+      .search-result:hover {
+        .last-img {
           z-index: 1;
           opacity: 1;
         }
       }
 
-      .searchBarRecentContainer {
+      .search-bar-recent-container {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 800px;
         transform: translateX(11%);
 
-        .searchBarRecentItems {
+        .search-bar-recent-items {
           padding-top: 80px;
           // font-family: 'BMDOHYEON';
 
@@ -83,7 +72,7 @@
     }
   }
 
-  .searchBarHeader {
+  .search-bar-header {
     display: flex;
     position: relative;
     align-items: center;
