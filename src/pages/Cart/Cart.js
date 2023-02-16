@@ -83,8 +83,8 @@ const Cart = () => {
     productList.length === 0 ? 'check-all-display-none' : 'check-all';
 
   const totalCost =
-    productList[0] && typeof productList[0].deliverFee === 'number'
-      ? (productList[0].deliverFee + totalAmount).toLocaleString()
+    productList[0] && typeof productList[0].deliveryFee === 'number'
+      ? (productList[0].deliveryFee + totalAmount).toLocaleString()
       : '0';
 
   return (
@@ -147,7 +147,7 @@ const Cart = () => {
                 </div>
                 <div className="delivery-fee">
                   <p>배송비</p>
-                  <p>+{productList[0]?.deliverFee} 원</p>
+                  <p>+{productList[0]?.deliveryFee} 원</p>
                 </div>
               </div>
 
