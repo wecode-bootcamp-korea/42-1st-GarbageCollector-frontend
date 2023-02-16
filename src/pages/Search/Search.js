@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { config } from '../../config';
 import SearchItem from './SearchItem';
 import '../Search/Search.scss';
 
@@ -13,24 +12,13 @@ const Search = () => {
   };
 
   const onClickSearch = e => {
-    fetch(`http://10.58.52.224:3000/search/?keyword=${userInput}`, {})
+    fetch(`http://10.58.52.227:3000/search/?keyword=${userInput}`, {})
       .then(response => response.json())
       .then(({ data }) => {
-        setFilteredList(data);
+        if (userInput === '') setFilteredList([]);
+        else setFilteredList(data);
       });
   };
-
-  useEffect(() => {
-    setSearchToggle(false);
-  }, [searchToggle]);
-
-  // useEffect(() => {
-  //   fetch(`${config.search}?search=${userInput}`, {})
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       setFilteredList(result.searched_products);
-  //     });
-  // }, [userInput]);
 
   return (
     <div className="search-bar-container">
@@ -42,19 +30,28 @@ const Search = () => {
             onChange={onChangeInput}
             value={userInput}
           />
-          <button onClick={onClickSearch}>1</button>
-          <i className=" fa fa-light fa-magnifying-glass fa-2x" />
+          <button onClick={onClickSearch}>
+            <img alt="search" src="images/search.png" />
+          </button>
         </div>
         <div className="search-result-container">
-          {filteredList.map(list => {
-            return filteredList ? (
-              <SearchItem key={list.id} list={list} />
-            ) : (
-              <p>텅 비었누</p>
-            );
-          })}
+          {/* {console.log(filteredList)} */}
+
+          {filteredList.length !== 0 ? (
+            <ul>
+              {filteredList.map(list => (
+                <li key={list.productId}>
+                  <SearchItem list={list} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="result-none">
+              <li>띠용!</li>
+              <li>일치하는 상품이 없습니다.</li>
+            </ul>
+          )}
         </div>
-        <i className="fa fa-duotone fa-xmark fa-2x" onClick={onClickSearch} />
       </div>
     </div>
   );

@@ -5,15 +5,15 @@ import React from 'react';
 const SearchItems = ({ list }) => {
   // const navigate = useNavigate();
 
-  // const goDetail = e => {
+  // const goDetail = e => x{
   //   navigate(`/goods/${list.product_id}`);
   //   handleSearchBarOn();
   // };
-  console.log(list.mainImage);
+  console.log(list);
   return (
     // <div className="searchResult" onClick={goDetail}>
     <div className="searchResult">
-      <img src={list.mainImage} alt="searchImg" />
+      <img src={list.mainImage} alt={list.mainImage} />
       <h2>{list.name}</h2>
     </div>
   );
