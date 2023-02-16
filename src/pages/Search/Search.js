@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import SearchItem from './SearchItem';
 import '../Search/Search.scss';
+import { BASE_URL } from '../../config';
+import Product from '../ProductList/Product/Product';
 
 const Search = () => {
   const [userInput, setUserInput] = useState('');
@@ -12,7 +13,7 @@ const Search = () => {
   };
 
   const onClickSearch = e => {
-    fetch(`http://10.58.52.227:3000/search/?keyword=${userInput}`, {})
+    fetch(`${BASE_URL}/search/?keyword=${userInput}`, {})
       .then(response => response.json())
       .then(({ data }) => {
         if (userInput === '') setFilteredList([]);
@@ -39,7 +40,8 @@ const Search = () => {
           <div className="search-result-container">
             {filteredList.map(list => (
               <div key={list.productId}>
-                <SearchItem list={list} />
+                <Product product={list} />
+                {/* <SearchItem list={list} /> */}
               </div>
             ))}
           </div>
