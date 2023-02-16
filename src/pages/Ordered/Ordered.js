@@ -12,6 +12,9 @@ const Ordered = () => {
       .then(res => res.json())
       .then(data => setProductList(data));
   }, []);
+
+  const [firstProduct] = productList;
+
   return (
     <div className="ordered">
       <main>
@@ -26,7 +29,7 @@ const Ordered = () => {
 
           <div>
             <div className="order-number">
-              주문번호 : {productList[0]?.orderNumber}
+              주문번호 : {firstProduct?.orderNumber}
             </div>
           </div>
           <button className="go-main-btn">홈으로 가기</button>
@@ -38,22 +41,20 @@ const Ordered = () => {
             <div className="order-info">
               <div className="ordered-product">
                 주문상품 :
-                <span className="ordered-pr">
-                  {productList[0]?.productName}
-                </span>
+                <span className="ordered-pr">{firstProduct?.productName}</span>
               </div>
 
               <div className="ordered-price">
                 결제금액 :
                 <span className="ordered-pr">
-                  {productList[0]?.productTotalPrice} 원
+                  {firstProduct?.productTotalPrice} 원
                 </span>
               </div>
 
               <div className="ordered-user">
-                배송지 :{' '}
-                <span className="ordered-name">{productList[0]?.receiver}</span>
-                <div className="ordered-address">{productList[0]?.address}</div>
+                배송지 :
+                <span className="ordered-name">{firstProduct?.receiver}</span>
+                <div className="ordered-address">{firstProduct?.address}</div>
               </div>
 
               <div className="agree-term">
