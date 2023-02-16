@@ -12,7 +12,7 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    fetch('http://10.58.52.135:3000/products', {
+    fetch('http://10.58.52.227:3000/products', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })
