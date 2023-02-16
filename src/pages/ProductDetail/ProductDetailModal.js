@@ -18,7 +18,7 @@ const ProductDetailModal = props => {
     <ul value={optionId} onClick={getOption} className="option-ul">
       <li>
         <button onClick={showOption} value={optionId} className="option-list">
-          {option.productOptionName}
+          {option.productOptionName} - 추가요금 : {option.extraPrice} 원
         </button>
       </li>
     </ul>

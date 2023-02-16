@@ -7,16 +7,19 @@ const ProductOrderModal = ({
   convertAmount,
   discountPrice,
   addOptionPrice,
+  setTotalPrice,
+  getOptionContent,
 }) => {
   const [productQuantity, setProductQuantity] = useState(1);
-
   const [computedPrice, setComputedPrice] = useState(0);
   const [isChange, setIsChange] = useState(false);
-  const { productOptionName } = option;
+  const { productOptionName, extraPrice, productOptionId, quantity } = option;
+
   const handlePlus = () => {
     setProductQuantity(productQuantity + 1);
     setIsChange(!isChange);
   };
+
   const handleMinus = () => {
     if (productQuantity > 1) {
       setProductQuantity(productQuantity - 1);
@@ -28,10 +31,12 @@ const ProductOrderModal = ({
     setProductQuantity(e.target.value);
   }
 
+  //convertAmount
   useEffect(() => {
-    setComputedPrice(convertAmount(productQuantity * discountPrice));
-    addOptionPrice(computedPrice);
-  }, [isChange]);
+    setComputedPrice(productQuantity * (Number(discountPrice) + extraPrice));
+    addOptionPrice(productOptionId, computedPrice);
+    getOptionContent(productOptionId, quantity);
+  }, [isChange, computedPrice]);
 
   return (
     <li className="buy-list">

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const NavCategory = ({ categoryName }) => {
   return (
     <li className="categories">
-      <Link to="#">{categoryName}</Link>
+      <Link to="/pages/ProductList/ProductPage">{categoryName}</Link>
     </li>
   );
 };

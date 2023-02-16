@@ -15,33 +15,65 @@ const ProductDetail = () => {
   const [optionDetail, setOptionDetail] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [productDetailPic, setProductDetailPic] = useState([]);
-  const [totalPrice, setTotalPrice] = useState('');
+  const [optionPriceList, setOptionPriceList] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [mainImage, setMainImage] = useState([]);
+  const [productText, setProductText] = useState([]);
   const { price, discountPrice, productName, productOptions } = optionDetail;
-
+  const [optionContentList, setOptionContentList] = useState([]);
+  const [optionContent, setOptionContent] = useState({
+    productOptionId: 0,
+    quantity: 0,
+  });
+  // const token = localStorage.getItem('token');
+  const token = localStorage.getItem(
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjU2Nzc5NywiZXhwIjoxNjc2NjU0MTk3LCJ1c2VySWQiOjEwfQ.kBOzOAXnVdT1WO9IiOV-UiCyuyWG18J3rKsW3u1hXns'
+  );
   const discount = Math.floor(Number((price - discountPrice) / price) * 100);
 
-  const getNumber = str => {
-    return Number(str);
+  const addOptionPrice = (id, amount) => {
+    setOptionPriceList({ ...optionPriceList, [id]: amount });
   };
 
-  const addOptionPrice = amount => {
-    if (amount === 0) return;
-    if (typeof totalPrice === 'string') {
-      setTotalPrice(
-        getNumber(
-          Number(totalPrice.replace(',', '')) + Number(amount.replace(',', ''))
-        )
-      );
-    } else {
-      setTotalPrice(
-        getNumber(Number(totalPrice) + Number(amount.replace(',', '')))
-      );
-    }
+  const getOptionContent = (id, quantity) => {
+    setOptionContent({ productOptionId: id, quantity: quantity });
+  };
+  // const add
+
+  // console.log(optionPriceList);
+  useEffect(() => {
+    sumOptionPrice();
+  }, [addOptionPrice]);
+
+  // useEffect(() => {
+  //   fetch('http://10.58.52.227:3000/carts', {
+  //     mehhod: 'POST',
+  //     headers: {
+  //       Authorization: token,
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //     },
+  //     body: JSON.stringify({
+  //       productOptionId: ,
+  //       quantity: ,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {});
+  // }, [optionContentList]);
+
+  const sumOptionPrice = () => {
+    setTotalPrice(
+      Object.values(optionPriceList).reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      )
+    );
   };
 
   const showOption = () => {
     setOptionOpen(!optionOpen);
   };
+
   const onSelect = option => {
     setSelectedOptions(prevState => {
       const set = new Set([...prevState, option]);
@@ -57,37 +89,30 @@ const ProductDetail = () => {
     );
     setSelectedOptions(updatedSelectedOptions);
   };
+
   useEffect(() => {
-    fetch(`${GET_PRODUCT_DETAIL}/products/13`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
+    fetch(
+      `${GET_PRODUCT_DETAIL}/products/13
+
+    `,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    )
       .then(response => response.json())
       .then(({ data }) => {
         setOptionDetail(data[0]);
         setIsLoading(false);
+        setProductDetailPic(data[0].detailImages);
+        setMainImage(data[0].mainImage);
+        setProductText(data[0].description);
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch(`${GET_PRODUCT_DETAIL}/products/12`, {
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' },
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setProductDetailPic(data[0]);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch('/data/productInfo.json')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setProductDetailPic(data);
-  //     });
-  // }, []);
-
+  const sendToCart = () => {
+    setOptionContentList();
+  };
   const convertAmount = amount => {
     return Math.floor(amount).toLocaleString();
   };
@@ -108,11 +133,7 @@ const ProductDetail = () => {
           </header>
 
           <div className="detail-images">
-            <img
-              className="detail-product-img"
-              src="/images/Summer.jpeg"
-              alt="여름"
-            />
+            <img className="detail-product-img" src={mainImage} alt="여름" />
           </div>
 
           <div className="detail-for-order">
@@ -162,6 +183,8 @@ const ProductDetail = () => {
                     convertAmount={convertAmount}
                     discountPrice={discountPrice}
                     addOptionPrice={addOptionPrice}
+                    setOptionPriceList={setOptionPriceList}
+                    getOptionContent={getOptionContent}
                   />
                 );
               })}
@@ -171,11 +194,11 @@ const ProductDetail = () => {
               <dl className="total-price">
                 <dt>총 금액</dt>
                 <dd>
-                  <span>{totalPrice}</span>
+                  <span>{totalPrice}원</span>
                 </dd>
               </dl>
               <footer className="buy-footer">
-                <button className="list-cart-btn" />
+                <button onClick={sendToCart} className="list-cart-btn" />
                 <button className="list-purchase-btn">바로 구매하기</button>
               </footer>
             </div>
@@ -189,6 +212,7 @@ const ProductDetail = () => {
           </div>
           <section className="detail-body">
             <ul>
+              <p className="detail-description">{productText}</p>
               {productDetailPic.map(info => {
                 return <ProductInfoTab key={info.id} info={info} />;
               })}
@@ -204,7 +228,6 @@ const ProductDetail = () => {
     </div>
   );
 };
-
 export default ProductDetail;
 
 const SHIPPING_GUIDE = [
