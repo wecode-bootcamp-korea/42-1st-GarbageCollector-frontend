@@ -7,8 +7,9 @@ import ProductList from './pages/ProductList/ProductList';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
-import Footer from './components/Footer/Footer';
+// import Footer from './components/Footer/Footer';
 import Nav from './components/Nav/Nav';
+import Ordered from './pages/Ordered/Ordered';
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/product/detail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/Ordered" element={<Ordered />} />
       </Routes>
       {/* <Footer /> */}
     </BrowserRouter>
