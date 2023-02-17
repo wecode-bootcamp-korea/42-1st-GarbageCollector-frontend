@@ -1,0 +1,94 @@
+.ordered {
+  padding: 80px 0px 200px;
+
+  .ordered-title {
+    padding-bottom: 20px;
+    height: 250px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    .complete-order {
+      border-radius: 60px;
+      font-size: 25px;
+      padding: 8px 12px;
+      color: white;
+      background-color: #d392ff;
+    }
+    .comp-order-msg {
+      margin-top: 35px;
+    }
+    .order-number {
+      font-size: 16px;
+      font-weight: 350;
+      color: grey;
+      margin-top: 20px;
+    }
+    .go-main-btn {
+      width: 200px;
+      height: 50px;
+      font-size: 20px;
+      color: white;
+      background-color: #d392ff;
+      border: none;
+      border-radius: 15px;
+      margin-top: 25px;
+      cursor: pointer;
+    }
+  }
+
+  .ordered-center {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .check-all {
+      border-bottom: 1px solid black;
+      display: flex;
+      width: 800px;
+      height: 32px;
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+    .order-info {
+      margin-top: 20px;
+    }
+  }
+
+  .go-main-btn:hover {
+    box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+  }
+
+  .comp-order-msg {
+    margin-top: 35px;
+  }
+
+  .ordered-price {
+    margin-top: 10px;
+  }
+  .ordered-pr {
+    margin-left: 20px;
+    color: grey;
+  }
+  .ordered-user {
+    margin-top: 10px;
+    .ordered-name {
+      margin-left: 30px;
+      color: grey;
+    }
+    .ordered-address {
+      margin-left: 80px;
+      color: grey;
+    }
+  }
+
+  .agree-term {
+    border-radius: 20px;
+    width: 800px;
+    font-size: 14px;
+    margin-top: 60px;
+    background-color: #fafafa;
+    padding: 20px;
+  }
+}

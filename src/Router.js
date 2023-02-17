@@ -9,6 +9,7 @@ import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import Footer from './components/Footer/Footer';
 import Nav from './components/Nav/Nav';
+import Ordered from './pages/Ordered/Ordered';
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/Ordered" element={<Ordered />} />
       </Routes>
       <Footer />
     </BrowserRouter>
