@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBeforeLog from './NavBeforeLog';
 import NavAfterLog from './NavAfterLog';
@@ -6,6 +6,11 @@ import './NavAside.scss';
 
 const NavAside = ({ showMoreInfo }) => {
   // const [showMypage, setShowMypage] = useState(false);
+  const [isLogIn, setIsLogIn] = useState(false);
+
+  const Logined = () => {
+    setIsLogIn(!isLogIn);
+  };
 
   const navigate = useNavigate();
 
