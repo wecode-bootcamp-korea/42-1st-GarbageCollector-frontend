@@ -24,7 +24,6 @@ const Cart = () => {
         setDeliveryFee(...deliveryFee, data.cartData.deliveryFee);
       });
   }, []);
-  console.log(productList);
   const navigate = useNavigate();
   const deleteProduct = cartId => {
     const url = `http://10.58.52.227:3000/carts?cartId=${cartId}`;

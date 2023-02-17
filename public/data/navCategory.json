@@ -1,0 +1,6 @@
+[
+  { "id": 1, "categoryName": "전체" },
+  { "id": 2, "categoryName": "머리" },
+  { "id": 3, "categoryName": "상체" },
+  { "id": 4, "categoryName": "하체" }
+]

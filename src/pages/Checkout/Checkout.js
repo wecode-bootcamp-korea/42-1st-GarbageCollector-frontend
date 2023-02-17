@@ -21,7 +21,7 @@ const Checkout = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { state } = location.state;
+  // const { state } = location.state;
   // console.log(location.state);
   useEffect(() => {
     fetch('http://10.58.52.227:3000/orders/orderform', {
@@ -59,7 +59,7 @@ const Checkout = () => {
     setInputs({ ...inputs, [name]: value });
   };
   const onClickBtnPay = () => {
-    navigate('/ordered');
+    navigate('/ordered', { state: inputs });
   };
   const onClickSubmitInfo = () => {
     setUserInfo([...userInfo, inputs]);
