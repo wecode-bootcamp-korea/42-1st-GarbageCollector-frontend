@@ -1,2 +1,339 @@
-// .checkout {
-// }
+.checkout {
+  padding: 120px 0px 200px;
+
+  .checkout-title {
+    padding-bottom: 30px;
+
+    height: 100px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .checkout-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .checkout-left {
+      margin-right: 30px;
+
+      .ship-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: -15px;
+        margin-bottom: 10px;
+      }
+      .shipping {
+        // border: 1px solid red;
+        border-top: 1px solid black;
+        padding: 20px 0px;
+        justify-content: center;
+        display: flex;
+        .ship-address {
+          border: none;
+          width: 328px;
+          height: 48px;
+          border-radius: 10px;
+          font-size: 18px;
+          background-color: #d392ff;
+          color: white;
+          cursor: pointer;
+        }
+        .ship-address:hover {
+          box-shadow: 328px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+        }
+      }
+      .order-product {
+        border-bottom: 1px solid black;
+        display: flex;
+        width: 700px;
+        height: 32px;
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 50px;
+        margin-bottom: 0px;
+      }
+      .payment-method {
+        border-bottom: 1px solid black;
+        display: flex;
+        width: 700px;
+        height: 32px;
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 50px;
+        margin-bottom: 0px;
+      }
+
+      .cart-item-container {
+        border-top: 1px solid #ddd;
+
+        display: flex;
+        height: auto;
+        width: 700px;
+        padding: 10px 0px;
+
+        .product-info {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .item-name {
+            margin-left: 5px;
+
+            width: 430px;
+            height: 60px;
+            display: flex;
+            padding-top: 20px;
+            flex-direction: column;
+            font-size: 14px;
+
+            .product-name {
+              font-weight: 500;
+            }
+
+            .product-option {
+              font-weight: 400;
+              color: #777777;
+              margin-top: 4px;
+            }
+          }
+          .product-quantity {
+            width: 125px;
+            text-align: end;
+            color: #777777;
+            font-weight: 500;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .checkout-right {
+      border: 1px solid #ddd;
+      background-color: #f8f8f8;
+      height: 410px;
+      width: 350px;
+      padding-left: 25px;
+      position: sticky;
+      top: 235px;
+
+      .purchase {
+        height: 235px;
+        width: 300px;
+        position: sticky;
+
+        .price-box {
+          margin-top: 5px;
+          height: 150px;
+
+          display: flex;
+          flex-direction: column;
+          padding: 15px;
+
+          .total-price {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            margin-top: 15px;
+          }
+
+          .delivery-fee {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            margin-top: 40px;
+          }
+        }
+        .estimated-amount {
+          height: 75px;
+          padding: 15px;
+          color: black;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
+          .total-price-word {
+            font-size: 16px;
+          }
+          .total-price-num {
+            font-size: 20px;
+            font-weight: 700;
+          }
+        }
+        .consent {
+          padding: 1px;
+          margin-top: 40px;
+          display: flex;
+          .purchase-consent {
+            font-size: 13px;
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .purchase-btn {
+        margin-top: 33px;
+        width: 300px;
+        height: 55px;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        background-color: #d392ff;
+        color: white;
+        opacity: 1;
+        cursor: pointer;
+      }
+      .purchase-btn:hover {
+        box-shadow: 300px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+      }
+    }
+  }
+}
+
+.user-point {
+  margin-top: 15px;
+  .use-point {
+    font-weight: 600;
+  }
+}
+.agree-term {
+  border-bottom: 1px solid black;
+  display: flex;
+  width: 700px;
+  height: 32px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+.check-agree {
+  margin-top: 15px;
+}
+
+.checkout-end {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  .checkout-end-btn {
+    margin-top: 25px;
+    border: none;
+    width: 328px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: #d392ff;
+    color: white;
+    cursor: pointer;
+  }
+
+  .checkout-end-btn:hover {
+    box-shadow: 328px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+  }
+}
+.discout-price {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  margin-top: 15px;
+  color: #777777;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal.open {
+  display: block;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 500px;
+  height: 468px;
+  border-radius: 45px;
+  font-weight: 500;
+}
+.user-id-input {
+  width: 457px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 14px;
+  color: #d392ff;
+}
+.user-info-input {
+  width: 457px;
+  height: 40px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding-left: 10px;
+  color: #d392ff;
+}
+
+.modal-btn {
+  width: 457px;
+  height: 48px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: #d392ff;
+  color: white;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.modal-x-btn {
+  margin-left: 215px;
+  border: none;
+  font-size: 30px;
+  background-color: white;
+  color: #d392ff;
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: 25px;
+  margin-left: 42.5%;
+  color: #d392ff;
+}
+
+.modal-reg-btn {
+  margin-top: 25px;
+}
+
+.name-input {
+  margin-top: 20px;
+}
+
+.modal-essential {
+  color: #d392ff;
+  font-size: 18px;
+}
+
+.info-of-user {
+  color: #777777;
+  font-size: 14px;
+  position: absolute;
+  margin-right: 570px;
+  margin-top: -14px;
+}
+
+.user-name {
+  margin-bottom: 5px;
+  color: black;
+  font-size: 16px;
+}
