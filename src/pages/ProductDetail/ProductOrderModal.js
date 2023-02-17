@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductOrder.scss';
 
-const ProductOrderModal = ({ option, removeOrder, selectedOptions }) => {
+const ProductOrderModal = ({
+  option,
+  removeOrder,
+  convertAmount,
+  discountPrice,
+  addOptionPrice,
+  setTotalPrice,
+  getOptionContent,
+}) => {
   const [productQuantity, setProductQuantity] = useState(1);
-
-  const { optName, addPrice, price } = option;
+  const [computedPrice, setComputedPrice] = useState(0);
+  const [isChange, setIsChange] = useState(false);
+  const { productOptionName, extraPrice, productOptionId, quantity } = option;
 
   const handlePlus = () => {
     setProductQuantity(productQuantity + 1);
+    setIsChange(!isChange);
   };
+
   const handleMinus = () => {
     if (productQuantity > 1) {
       setProductQuantity(productQuantity - 1);
+      setIsChange(!isChange);
     }
   };
 
@@ -19,9 +31,16 @@ const ProductOrderModal = ({ option, removeOrder, selectedOptions }) => {
     setProductQuantity(e.target.value);
   }
 
+  //convertAmount
+  useEffect(() => {
+    setComputedPrice(productQuantity * (Number(discountPrice) + extraPrice));
+    addOptionPrice(productOptionId, computedPrice);
+    getOptionContent(productOptionId, quantity);
+  }, [isChange, computedPrice]);
+
   return (
     <li className="buy-list">
-      <h4>{optName}</h4>
+      <h4>{productOptionName}</h4>
       <div className="buy-options">
         <div className="buy-quantity">
           <button onClick={handleMinus} className="btn-minus" />
@@ -36,10 +55,13 @@ const ProductOrderModal = ({ option, removeOrder, selectedOptions }) => {
           <button onClick={handlePlus} className="btn-plus" />
         </div>
         <p className="price">
-          <span>{productQuantity * (addPrice + price)}원</span>
+          <span>{computedPrice}원</span>
         </p>
       </div>
-      <button onClick={() => removeOrder(option.id)} className="btn-delete" />
+      <button
+        onClick={() => removeOrder(option.productOptionId)}
+        className="btn-delete"
+      />
     </li>
   );
 };

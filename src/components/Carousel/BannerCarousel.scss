@@ -1,4 +1,4 @@
-.carousel {
+.banner-carousel {
   position: relative;
 
   .slide-list {
@@ -64,8 +64,8 @@
   .next-button {
     position: absolute;
     top: 50%;
-    width: 30px;
-    height: 30px;
+    width: 100px;
+    height: 100px;
     transform: translatey(-50%);
     border: 0;
     background-color: transparent;

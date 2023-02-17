@@ -1,10 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const NavCategory = ({ categoryName }) => {
+  const navigate = useNavigate();
+
+  const goToProductList = () => {
+    navigate(`/product`);
+  };
   return (
-    <li className="categories">
-      <Link to="#">{categoryName}</Link>
+    <li onClick={goToProductList} className="categories">
+      {categoryName}
     </li>
   );
 };

@@ -49,6 +49,7 @@
       }
       .detail-product-img {
         width: 500px;
+        height: 500px;
         margin: 0 35px;
       }
 
@@ -193,6 +194,17 @@
       }
       .detail-body {
         padding-top: 80px;
+        width: 1000px;
+        display: flex;
+        flex-direction: column;
+        margin-left: 55px;
+
+        .detail-description {
+          text-align: center;
+          margin: 110px 0;
+          font-size: 65px;
+          font-family: 'BMDOHYEON';
+        }
       }
     }
   }

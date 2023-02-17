@@ -5,7 +5,7 @@
     "productName": "보라카이 가서 한잔",
     "productTotalPrice": 15000,
     "quantity": 1,
-    "deliverFee": 3000
+    "deliveryFee": 3000
   },
   {
     "cartId": 2,
@@ -13,7 +13,7 @@
     "productName": "보라카이 가서 두잔",
     "productTotalPrice": 5000,
     "quantity": 1,
-    "deliverFee": 3000
+    "deliveryFee": 3000
   },
   {
     "cartId": 3,
@@ -21,6 +21,6 @@
     "productName": "보라카이 가서 세잔",
     "productTotalPrice": 100000,
     "quantity": 1,
-    "deliverFee": 3000
+    "deliveryFee": 3000
   }
 ]
