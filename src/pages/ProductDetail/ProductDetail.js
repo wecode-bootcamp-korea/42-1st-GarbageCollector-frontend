@@ -9,7 +9,6 @@ import ProductBasicInfo from './ProductBasicInfo';
 import ProductRec from './ProductRec';
 import { GET_PRODUCT_DETAIL } from '../../config';
 import './ProductDetail.scss';
-
 const ProductDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [optionOpen, setOptionOpen] = useState(false);
@@ -26,45 +25,44 @@ const ProductDetail = () => {
     productOptionId: 0,
     quantity: 0,
   });
+  const [isSend, setIsSend] = useState(false);
   // const token = localStorage.getItem('token');
-  const token = localStorage.getItem(
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjU2Nzc5NywiZXhwIjoxNjc2NjU0MTk3LCJ1c2VySWQiOjEwfQ.kBOzOAXnVdT1WO9IiOV-UiCyuyWG18J3rKsW3u1hXns'
-  );
+  const token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM';
   const discount = Math.floor(Number((price - discountPrice) / price) * 100);
-
   const params = useParams();
   const userId = params.id;
-
   const addOptionPrice = (id, amount) => {
     setOptionPriceList({ ...optionPriceList, [id]: amount });
   };
-
   const getOptionContent = (id, quantity) => {
     setOptionContent({ productOptionId: id, quantity: quantity });
   };
-  // const add
-
+  console.log(optionContent);
   // console.log(optionPriceList);
   useEffect(() => {
     sumOptionPrice();
   }, [addOptionPrice]);
-
-  // useEffect(() => {
-  //   fetch('http://10.58.52.227:3000/carts', {
-  //     mehhod: 'POST',
-  //     headers: {
-  //       Authorization: token,
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //     },
-  //     body: JSON.stringify({
-  //       productOptionId: ,
-  //       quantity: ,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {});
-  // }, [optionContentList]);
-
+  useEffect(() => {
+    setOptionContentList(optionContent);
+  }, [optionContent]);
+  useEffect(() => {
+    fetch('http://10.58.52.227:3000/carts', {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify([
+        {
+          productOptionId: optionContent.productOptionId,
+          quantity: optionContent.quantity,
+        },
+      ]),
+    })
+      .then(response => response.json())
+      .then(data => {});
+  }, [isSend]);
   const sumOptionPrice = () => {
     setTotalPrice(
       Object.values(optionPriceList).reduce(
@@ -73,27 +71,22 @@ const ProductDetail = () => {
       )
     );
   };
-
   const showOption = () => {
     setOptionOpen(!optionOpen);
   };
-
   const onSelect = option => {
     setSelectedOptions(prevState => {
       const set = new Set([...prevState, option]);
       return [...set];
     });
-
     setOptionOpen(false);
   };
-
   const removeOrder = id => {
     const updatedSelectedOptions = selectedOptions.filter(
       option => option.productOptionId !== id
     );
     setSelectedOptions(updatedSelectedOptions);
   };
-
   useEffect(() => {
     fetch(`${GET_PRODUCT_DETAIL}/${userId}`, {
       method: 'GET',
@@ -108,16 +101,15 @@ const ProductDetail = () => {
         setProductText(data[0].description);
       });
   }, [userId]);
-
   const sendToCart = () => {
+    setIsSend(!isSend);
     setOptionContentList();
+    alert('상품이 장바구니에 담겼습니다');
   };
   const convertAmount = amount => {
     return Math.floor(amount).toLocaleString();
   };
-
   if (isLoading) return null;
-
   return (
     <div className="detail-container">
       <div className="detail-wrap">
@@ -130,11 +122,9 @@ const ProductDetail = () => {
               {convertAmount(discountPrice)}원
             </p>
           </header>
-
           <div className="detail-images">
             <img className="detail-product-img" src={mainImage} alt="여름" />
           </div>
-
           <div className="detail-for-order">
             {SHIPPING_GUIDE.map(shipping => {
               return (
@@ -148,7 +138,6 @@ const ProductDetail = () => {
                 </dl>
               );
             })}
-
             <div className="buy-list-box">
               <div className="buy-list-option">
                 <button className="option-btn" onClick={showOption}>
@@ -169,7 +158,6 @@ const ProductDetail = () => {
                 </div>
               </div>
             </div>
-
             <ul className="buy-list-box">
               {selectedOptions.map(option => {
                 return (
@@ -188,7 +176,6 @@ const ProductDetail = () => {
                 );
               })}
             </ul>
-
             <div className="total-price-box">
               <dl className="total-price">
                 <dt>총 금액</dt>
@@ -228,7 +215,6 @@ const ProductDetail = () => {
   );
 };
 export default ProductDetail;
-
 const SHIPPING_GUIDE = [
   {
     id: 1,
