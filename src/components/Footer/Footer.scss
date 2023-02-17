@@ -2,21 +2,26 @@
   display: flex;
   bottom: 0;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 250px;
   padding: 50px 100px;
   background-color: #fafafa;
   line-height: 30px;
+  margin-top: 50px;
 
   .footer-inner {
     display: flex;
+    font-weight: 500;
+    align-items: center;
 
     .footer-logo {
       position: relative;
-      width: 400px;
+      width: 350px;
       margin-right: 50px;
       img {
         width: 100%;
+        margin-top: 20px;
+        padding-top: 20px;
       }
     }
 

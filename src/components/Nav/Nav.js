@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavCategory from './NavCategory';
 import NavRightWrap from './NavRightWrap';
 import './Nav.scss';
@@ -7,6 +7,11 @@ import './Nav.scss';
 const Nav = () => {
   const [navCategories, setNavCategories] = useState([]);
   const [navRightLists, setNavRightLists] = useState([]);
+
+  const navigate = useNavigate();
+  const goToMain = () => {
+    navigate(`/`);
+  };
 
   useEffect(() => {
     fetch('/data/navCategory.json')
@@ -23,8 +28,13 @@ const Nav = () => {
   return (
     <nav>
       <div className="navWrap">
-        <Link to="#" />
-        <img className="logo" src="/images/logo.png" alt="로고" />
+        <img
+          onClick={goToMain}
+          className="logo"
+          src="/images/newLogo.png"
+          alt="로고"
+        />
+
         <ul className="categorywrap">
           {navCategories.map(navcategory => {
             return (

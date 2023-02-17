@@ -1,22 +1,32 @@
 [
   {
-    "productId": 1,
-    "src": "https://cdn-mart.baemin.com/inventory-unit/c219f0b9-0674-453a-a8a2-7a89ffbd3bf0.png",
-    "alt": "1"
+    "productName": "엔터 무적권 입력 가능한 쿠션",
+    "modelNumber": "4447777333",
+    "description": "description2",
+    "price": "21000.00",
+    "discountPrice": "18000.00",
+    "mainImage": "https://drive.google.com/uc?export=view&id=1MUimTJCox3NBh7uZ4jxDeHoi2xS3kxmF",
+    "subImage": "https://drive.google.com/uc?export=view&id=1VDedgRHOo8K6l_Yp69IW_ZJ6xZ1cPh_H",
+    "status": "For Sale"
   },
   {
-    "productId": 2,
-    "src": "https://cdn-mart.baemin.com/inventory-unit/24fee219-24f3-479d-8918-95536b469cfb.jpg",
-    "alt": "2"
+    "productName": "앗 내 노트북!!! 커피 쏟은 모형",
+    "modelNumber": "4447777333",
+    "description": "description2",
+    "price": "7000.00",
+    "discountPrice": "3500.00",
+    "mainImage": "https://drive.google.com/uc?export=view&id=1ci1chCPkpVCxHwEkf-XSLVaQvkpMqff3",
+    "subImage": "https://drive.google.com/uc?export=view&id=1R6_clqsv1GyDr1gWyKxOBbUDxXO32zqz",
+    "status": "For Sale"
   },
   {
-    "productId": 3,
-    "src": "https://cdn-mart.baemin.com/inventory-unit/ceb02ee2-d489-4101-8dd7-0b44f7145196.png",
-    "alt": "3"
-  },
-  {
-    "productId": 4,
-    "src": "https://cdn-mart.baemin.com/inventory-unit/c219f0b9-0674-453a-a8a2-7a89ffbd3bf0.png",
-    "alt": "4"
+    "productName": "보라카이 패키지",
+    "modelNumber": "4447777333",
+    "description": "description2",
+    "price": "540000.00",
+    "discountPrice": "270000.00",
+    "mainImage": "https://images.pexels.com/photos/3507996/pexels-photo-3507996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "subImage": "https://images.pexels.com/photos/5651698/pexels-photo-5651698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "status": "For Sale"
   }
 ]
