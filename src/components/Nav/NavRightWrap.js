@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import NavAside from './NavAside';
+import './NavRightWrap.scss';
 
 const NavRightWrap = ({ navrighticon }) => {
   const {
@@ -10,6 +12,12 @@ const NavRightWrap = ({ navrighticon }) => {
     moreInfoIcon,
     moreIncoAlt,
   } = navrighticon;
+
+  const [asideOpen, setAsideOpen] = useState(false);
+
+  const showMoreInfo = () => {
+    setAsideOpen(!asideOpen);
+  };
 
   return (
     <li className="navrights">
@@ -24,9 +32,10 @@ const NavRightWrap = ({ navrighticon }) => {
           <span className="navLogInFont">로그인</span>
         </Link>
       </div>
-      <button className="moreInfoBtn">
+      <button onClick={showMoreInfo} className="moreInfoBtn">
         <img className="moreInfoIcon" src={moreInfoIcon} alt={moreIncoAlt} />
       </button>
+      {asideOpen && <NavAside showMoreInfo={showMoreInfo} />}
     </li>
   );
 };
