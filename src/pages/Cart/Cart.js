@@ -1,54 +1,175 @@
 import React, { useState, useEffect } from 'react';
 import CartItems from './CartItems';
 import './Cart.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [productList, setProductList] = useState([]);
   const [isAllCheck, setIsAllCheck] = useState([]);
+  const [deliveryFee, setDeliveryFee] = useState(0);
 
   const isCheckedBtnAll = productList.length === isAllCheck.length;
-
   useEffect(() => {
-    fetch('/data/cart.json', {
+    fetch('http://10.58.52.227:3000/carts ', {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM',
+      },
     })
-      .then(res => res.json())
-      .then(data => setProductList(data));
+      .then(response => response.json())
+      .then(data => {
+        setProductList(...productList, data.cartData.cartItems);
+        setDeliveryFee(...deliveryFee, data.cartData.deliveryFee);
+      });
   }, []);
-
+  const navigate = useNavigate();
   const deleteProduct = cartId => {
-    const nextProduct = productList.filter(
-      product => product.cartId !== cartId
+    const url = `http://10.58.52.227:3000/carts?cartId=${cartId}`;
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert('상품이 삭제되었습니다');
+        setProductList(prevProducts =>
+          prevProducts.filter(product => product.cartId !== cartId)
+        );
+      });
+  };
+
+  const onClickBtnOrder = () => {
+    navigate('/checkout', { state: [productList, deliveryFee] });
+  };
+
+  const handleDeleteSelected = () => {
+    const selectedProductIds = isAllCheck;
+    const url = `http://10.58.52.227:3000/carts?cartId=${selectedProductIds.join(
+      '&cartId='
+    )}`;
+
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setProductList(prevProducts =>
+          prevProducts.filter(
+            product => !selectedProductIds.includes(product.cartId)
+          )
+        );
+        setIsAllCheck([]);
+        alert('선택한 상품이 삭제되었습니다.');
+      });
+  };
+
+  const increaseQuantity = productOptionId => {
+    const newQuantity =
+      productList.find(product => product.productOptionId === productOptionId)
+        ?.quantity + 1;
+    if (newQuantity === undefined) {
+      console.error(
+        `Product with productOptionId ${productOptionId} not found`
+      );
+      return;
+    }
+    fetch('http://10.58.52.227:3000/carts', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM',
+      },
+      body: JSON.stringify({
+        productOptionId: productOptionId,
+        quantity: 1,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        const updatedProductList = productList.map(product => {
+          if (product.productOptionId === productOptionId) {
+            return { ...product, quantity: newQuantity };
+          }
+          return product;
+        });
+        setProductList(updatedProductList);
+      });
+  };
+
+  const decreaseQuantity = productOptionId => {
+    const productToUpdate = productList.find(
+      product => product.productOptionId === productOptionId
     );
-    alert('상품이 삭제됩니다');
-    setProductList(nextProduct);
-  };
+    if (!productToUpdate) {
+      console.error(
+        `Product with productOptionId ${productOptionId} not found`
+      );
+      return;
+    }
 
-  const increaseQuantity = cartId => {
-    const nextProductList = productList.map(product => {
-      if (product.cartId === cartId)
-        return { ...product, quantity: product.quantity + 1 };
-      else return product;
-    });
-    setProductList(nextProductList);
-  };
+    const currentQuantity = productToUpdate.quantity;
+    const newQuantity = currentQuantity > 0 ? currentQuantity - 1 : 0;
 
-  const decreaseQuantity = cartId => {
-    const nextProductList = productList.map(product => {
-      if (product.cartId === cartId)
-        return {
-          ...product,
-          quantity: product.quantity && product.quantity - 1,
-        };
-      else return product;
-    });
-    setProductList(nextProductList);
+    fetch('http://10.58.52.227:3000/carts', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM',
+      },
+      body: JSON.stringify({
+        productOptionId: productOptionId,
+        quantity: -1,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        const updatedProductList = productList.map(product => {
+          if (product.productOptionId === productOptionId) {
+            return { ...product, quantity: newQuantity };
+          }
+          return product;
+        });
+        setProductList(updatedProductList);
+      })
+      .catch(error => {
+        console.error(error);
+        const updatedProductList = productList.map(product => {
+          if (product.productOptionId === productOptionId) {
+            return { ...product, quantity: currentQuantity };
+          }
+          return product;
+        });
+        setProductList(updatedProductList);
+      });
   };
-
-  const totalAmount = productList.reduce(
+  const totalAmounts = productList.reduce(
     (acc, curr) => acc + curr.quantity * curr.productTotalPrice,
     0
   );
+
   const isDisabled = productList.length === 0;
 
   const handleSingleCheck = (checked, id) => {
@@ -69,22 +190,12 @@ const Cart = () => {
     }
   };
 
-  const handleDeleteSelected = () => {
-    const selectedProductIds = isAllCheck;
-    const nextProductList = productList.filter(
-      product => !selectedProductIds.includes(product.cartId)
-    );
-    setProductList(nextProductList);
-    setIsAllCheck([]);
-    alert('선택한 상품이 삭제되었습니다.');
-  };
-
   const isDisplayNone =
     productList.length === 0 ? 'check-all-display-none' : 'check-all';
 
   const totalCost =
-    productList[0] && typeof productList[0].deliveryFee === 'number'
-      ? (productList[0].deliveryFee + totalAmount).toLocaleString()
+    productList[0] && typeof deliveryFee === 'number'
+      ? (deliveryFee + totalAmounts).toLocaleString()
       : '0';
 
   return (
@@ -143,11 +254,11 @@ const Cart = () => {
               <div className="price-box">
                 <div className="total-price">
                   <p>총 상품금액</p>
-                  <p> {totalAmount.toLocaleString()} 원</p>
+                  <p> {totalAmounts.toLocaleString()} 원</p>
                 </div>
                 <div className="delivery-fee">
                   <p>배송비</p>
-                  <p>+{productList[0]?.deliveryFee} 원</p>
+                  <p>+{deliveryFee} 원</p>
                 </div>
               </div>
 
@@ -159,6 +270,7 @@ const Cart = () => {
                 type="button"
                 className="purchase-btn"
                 disabled={isDisabled}
+                onClick={onClickBtnOrder}
               >
                 주문하기
               </button>

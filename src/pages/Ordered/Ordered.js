@@ -1,20 +1,27 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import React from 'react';
 import './Ordered.scss';
 
 const Ordered = () => {
   const [productList, setProductList] = useState([]);
-
+  const [orderNumber, setOrderNumber] = useState(0);
+  const navigate = useNavigate();
+  const locate = useLocation();
   useEffect(() => {
-    fetch('/data/ordered.json', {
-      method: 'GET',
+    fetch('http://10.58.52.227:3000/orders/payment', {
+      method: 'POST',
+      authorization:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM',
     })
       .then(res => res.json())
-      .then(data => setProductList(data));
+      .then(data => setOrderNumber(data));
   }, []);
-
   const [firstProduct] = productList;
 
+  const goToMain = () => {
+    navigate('/');
+  };
   return (
     <div className="ordered">
       <main>
@@ -32,7 +39,9 @@ const Ordered = () => {
               주문번호 : {firstProduct?.orderNumber}
             </div>
           </div>
-          <button className="go-main-btn">홈으로 가기</button>
+          <button className="go-main-btn" onClick={goToMain}>
+            홈으로 가기
+          </button>
         </div>
 
         <div className="ordered-center">

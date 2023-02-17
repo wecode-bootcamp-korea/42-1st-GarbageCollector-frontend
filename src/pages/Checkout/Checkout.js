@@ -1,32 +1,66 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CheckoutList from './CheckoutList';
 import './Checkout.scss';
 import UserInfo from './UserInfo';
 
 const Checkout = () => {
   const [productList, setProductList] = useState([]);
+  const [deliveryFee, setDeliveryFee] = useState(0);
   const [isAllCheck, setIsAllCheck] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
+  const [getPayment, setGetPayment] = useState([]);
   const [inputs, setInputs] = useState({
     userName: '',
     userPw: '',
     userAddress: '',
     userComment: '',
   });
+  const [receiveData, setReceiveData] = useState([]);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  // const { state } = location.state;
+  // console.log(location.state);
   useEffect(() => {
-    fetch('/data/checkout.json', {
-      method: 'GET',
+    fetch('http://10.58.52.227:3000/orders/orderform', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM',
+      },
+      body: JSON.stringify([
+        {
+          cartId: location.state[0][0].cartId,
+          productOptionId: location.state[0][0].productOptionId,
+          quantity: location.state[0][0].quantity,
+        },
+        {
+          cartId: location.state[0][1].cartId,
+          productOptionId: location.state[0][1].productOptionId,
+          quantity: location.state[0][1].quantity,
+        },
+      ]),
     })
       .then(res => res.json())
-      .then(data => setProductList(data));
-  }, []);
+      .then(({ data }) => {
+        // console.log(data);
+        setProductList(data.productOptions);
+        setGetPayment(data);
+        console.log(data);
+      });
+    // setProductList(location.state[0]);
+    // setDeliveryFee(location.state[1]);
+  }, [location.state]);
   const onChangeInput = e => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
-
+  const onClickBtnPay = () => {
+    navigate('/ordered', { state: inputs });
+  };
   const onClickSubmitInfo = () => {
     setUserInfo([...userInfo, inputs]);
     setInputs({ userName: '', userPw: '', userAddress: '', userComment: '' });
@@ -49,33 +83,27 @@ const Checkout = () => {
     }
   };
 
-  const userPoint = productList[0]?.userPoint;
-  const cartId = productList[0]?.cartId;
-  const deliveryFee = productList[0]?.deliveryFee;
+  const userPoint = Number(getPayment.userPoint).toLocaleString();
+  const cartId = productList.cartId;
+  // const deliveryFee = productList[0]?.deliveryFee;
   const totalAmount = productList.reduce(
     (acc, curr) => acc + curr.quantity * curr.productPriceBeforeDiscount,
     0
   );
-
   const totalDiscount = productList.reduce((accur, current) => {
     return accur + current.discountPrice;
   }, 0);
 
-  const totalCost =
-    productList[0] && typeof productList[0].deliveryFee === 'number'
-      ? (
-          productList[0].deliveryFee +
-          totalAmount -
-          totalDiscount
-        ).toLocaleString()
-      : '0';
+  // const totalCost =
+  //   typeof deliveryFee === 'number'
+  //     ? (deliveryFee + totalAmount - totalDiscount).toLocaleString()
+  //     : '0';
+  const totalCost = getPayment.checkTotalPrice;
 
-  const discountPrice =
-    productList[0] && typeof productList[0].discountPrice === 'number'
-      ? (
-          productList[0].discountPrice + productList[0].discountPrice
-        ).toLocaleString()
-      : '0';
+  const discountPrice = getPayment.discount;
+  // productList && typeof productList.discountPrice === 'number'
+  //   ? (productList.discountPrice + productList.discountPrice).toLocaleString()
+  //   : '0';
 
   return (
     <div className="checkout">
@@ -197,7 +225,11 @@ const Checkout = () => {
                   하였으며, 구매진행에 동의합니다.
                 </span>
               </div>
-              <button type="button" className="purchase-btn">
+              <button
+                type="button"
+                onClick={onClickBtnPay}
+                className="purchase-btn"
+              >
                 {totalCost}원 결제하기
               </button>
             </div>

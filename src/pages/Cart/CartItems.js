@@ -9,7 +9,7 @@ const CartItems = props => {
     handleSingleCheck,
     isAllCheck,
   } = props;
-
+  // console.log(props);
   return (
     <div className="Cart-items">
       <div className="cart-item-container">
@@ -32,14 +32,14 @@ const CartItems = props => {
           <div className="product-btn">
             <button
               className="count-btn"
-              onClick={() => decreaseQuantity(product.cartId)}
+              onClick={() => decreaseQuantity(product.productOptionId)}
             >
               -
             </button>
             <input className="count-box" value={product.quantity} />
             <button
               className="count-btn"
-              onClick={() => increaseQuantity(product.cartId)}
+              onClick={() => increaseQuantity(product.productOptionId)}
             >
               +
             </button>
