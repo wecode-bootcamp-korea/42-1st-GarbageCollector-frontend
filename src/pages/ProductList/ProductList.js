@@ -10,7 +10,6 @@ const ProductList = () => {
   const goToDetail = id => {
     navigate(`/products/${id}`);
   };
-
   useEffect(() => {
     fetch('http://10.58.52.135:3000/products', {
       method: 'GET',
@@ -21,26 +20,11 @@ const ProductList = () => {
   }, []);
 
   return (
-    <div className="product-page-container">
-      <header className="product-header">
-        <h2 className="product-h2">
-          {CATEGORY_TITLE[0].title}
-          <sup>{CATEGORY_TITLE[0].subTitle}</sup>
-        </h2>
-        <p className="product-p">{CATEGORY_TITLE[0].text}</p>
-      </header>
-      <div className="products-box">
-        <div className="productListWrap">
-          <div className="productList">
-            {productList.map(product => (
-              <Product
-                key={product.productId}
-                product={product}
-                goToDetail={goToDetail}
-              />
-            ))}
-          </div>
-        </div>
+    <div className="productListWrap">
+      <div className="productList">
+        {productList.map(product => (
+          <Product key={product.id} product={product} goToDetail={goToDetail} />
+        ))}
       </div>
     </div>
   );

@@ -1,10 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import NavBeforeLog from './NavBeforeLog';
 import NavAfterLog from './NavAfterLog';
 import './NavAside.scss';
 
 const NavAside = ({ showMoreInfo }) => {
+  // const [showMypage, setShowMypage] = useState(false);
+  const [isLogIn, setIsLogIn] = useState(false);
+
+  const Logined = () => {
+    setIsLogIn(!isLogIn);
+  };
+
+  const navigate = useNavigate();
+
+  const goToProductList = () => {
+    navigate(`/products`);
+  };
   return (
     <div className="aside-wrap">
       <NavBeforeLog />
@@ -14,7 +26,11 @@ const NavAside = ({ showMoreInfo }) => {
         <ul className="aside-ul">
           {ASIDE_CATEGORIES.map(category => {
             return (
-              <li className="aside-li" key={category.id}>
+              <li
+                onClick={goToProductList}
+                className="aside-li"
+                key={category.id}
+              >
                 {category.name}
               </li>
             );

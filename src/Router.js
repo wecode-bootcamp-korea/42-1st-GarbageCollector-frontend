@@ -7,7 +7,7 @@ import ProductList from './pages/ProductList/ProductList';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
-// import Footer from './components/Footer/Footer';
+import Footer from './components/Footer/Footer';
 import Nav from './components/Nav/Nav';
 import Ordered from './pages/Ordered/Ordered';
 

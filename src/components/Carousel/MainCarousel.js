@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MainCarousel.scss';
+import Product from '../../pages/ProductList/Product/Product';
 
 const MainCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,20 +28,21 @@ const MainCarousel = () => {
       </button>
       <div
         className="slide-window"
-        style={{ width: `${312 * slideList.length - 3}px` }}
+        style={{ width: `${230 * slideList.length - 3}px` }}
       >
         <ul
           className="slide-list"
           style={{
-            width: `${312 * slideList.length}px`,
-            transform: `translateX(${-312 * currentIndex}px)`,
+            width: `${230 * slideList.length}px`,
+            transform: `translateX(${-230 * currentIndex}px)`,
             transition: `all 1s`,
           }}
         >
           {slideList.map(slide => (
-            <li key={slide.productId}>
-              <img alt={slide.alt} src={slide.src} />
-            </li>
+            // <li key={slide.productId}>
+            //   <img alt={slide.alt} src={slide.src} />
+            // </li>
+            <Product product={slide} />
           ))}
         </ul>
       </div>

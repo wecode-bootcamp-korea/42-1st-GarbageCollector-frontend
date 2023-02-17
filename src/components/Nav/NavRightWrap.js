@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavAside from './NavAside';
 import './NavRightWrap.scss';
 
@@ -14,6 +14,19 @@ const NavRightWrap = ({ navrighticon }) => {
   } = navrighticon;
 
   const [asideOpen, setAsideOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const goToLogin = () => {
+    navigate(`/login`);
+  };
+
+  const goToSearch = () => {
+    navigate(`/search`);
+  };
+
+  const goToCart = () => {
+    navigate(`/cart`);
+  };
 
   const showMoreInfo = () => {
     setAsideOpen(!asideOpen);
@@ -21,16 +34,17 @@ const NavRightWrap = ({ navrighticon }) => {
 
   return (
     <li className="navrights">
-      <button className="navSearchIcon">
+      <button onClick={goToSearch} className="navSearchIcon">
         <img className="navSearchIcon" src={searchIcon} alt={searchAlt} />
       </button>
-      <Link to="#">
-        <img className="navCartIcon" src={cartIcon} alt={castAlt} />
-      </Link>
-      <div className="navLogIn">
-        <Link to="#">
-          <span className="navLogInFont">로그인</span>
-        </Link>
+      <img
+        onClick={goToCart}
+        className="navCartIcon"
+        src={cartIcon}
+        alt={castAlt}
+      />
+      <div onClick={goToLogin} className="navLogIn">
+        <span className="navLogInFont">로그인</span>
       </div>
       <button onClick={showMoreInfo} className="moreInfoBtn">
         <img className="moreInfoIcon" src={moreInfoIcon} alt={moreIncoAlt} />
