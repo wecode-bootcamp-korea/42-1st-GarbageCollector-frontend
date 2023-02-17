@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ProductDetailModal from './ProductDetailModal';
 import ProductOrderModal from './ProductOrderModal';
 import ProductDes from './ProductDes';
@@ -6,13 +7,72 @@ import ProductInfoTab from './ProductInfoTab';
 import ProductReview from './ProductReview';
 import ProductBasicInfo from './ProductBasicInfo';
 import ProductRec from './ProductRec';
+import { GET_PRODUCT_DETAIL } from '../../config';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [optionOpen, setOptionOpen] = useState(false);
   const [optionDetail, setOptionDetail] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [productDetailPic, setProductDetailPic] = useState([]);
+  const [optionPriceList, setOptionPriceList] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [mainImage, setMainImage] = useState([]);
+  const [productText, setProductText] = useState([]);
+  const { price, discountPrice, productName, productOptions } = optionDetail;
+  const [optionContentList, setOptionContentList] = useState([]);
+  const [optionContent, setOptionContent] = useState({
+    productOptionId: 0,
+    quantity: 0,
+  });
+  // const token = localStorage.getItem('token');
+  const token = localStorage.getItem(
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjU2Nzc5NywiZXhwIjoxNjc2NjU0MTk3LCJ1c2VySWQiOjEwfQ.kBOzOAXnVdT1WO9IiOV-UiCyuyWG18J3rKsW3u1hXns'
+  );
+  const discount = Math.floor(Number((price - discountPrice) / price) * 100);
+
+  const params = useParams();
+  const userId = params.id;
+
+  const addOptionPrice = (id, amount) => {
+    setOptionPriceList({ ...optionPriceList, [id]: amount });
+  };
+
+  const getOptionContent = (id, quantity) => {
+    setOptionContent({ productOptionId: id, quantity: quantity });
+  };
+  // const add
+
+  // console.log(optionPriceList);
+  useEffect(() => {
+    sumOptionPrice();
+  }, [addOptionPrice]);
+
+  // useEffect(() => {
+  //   fetch('http://10.58.52.227:3000/carts', {
+  //     mehhod: 'POST',
+  //     headers: {
+  //       Authorization: token,
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //     },
+  //     body: JSON.stringify({
+  //       productOptionId: ,
+  //       quantity: ,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {});
+  // }, [optionContentList]);
+
+  const sumOptionPrice = () => {
+    setTotalPrice(
+      Object.values(optionPriceList).reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      )
+    );
+  };
 
   const showOption = () => {
     setOptionOpen(!optionOpen);
@@ -23,48 +83,56 @@ const ProductDetail = () => {
       const set = new Set([...prevState, option]);
       return [...set];
     });
+
     setOptionOpen(false);
   };
 
   const removeOrder = id => {
     const updatedSelectedOptions = selectedOptions.filter(
-      option => option.id !== id
+      option => option.productOptionId !== id
     );
     setSelectedOptions(updatedSelectedOptions);
   };
 
   useEffect(() => {
-    fetch('/data/optionModal.json')
+    fetch(`${GET_PRODUCT_DETAIL}/${userId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
       .then(response => response.json())
-      .then(data => setOptionDetail(data));
-  }, []);
+      .then(({ data }) => {
+        setOptionDetail(data[0]);
+        setIsLoading(false);
+        setProductDetailPic(data[0].detailImages);
+        setMainImage(data[0].mainImage);
+        setProductText(data[0].description);
+      });
+  }, [userId]);
 
-  useEffect(() => {
-    fetch('/data/productInfo.json')
-      .then(response => response.json())
-      .then(data => setProductDetailPic(data));
-  }, []);
+  const sendToCart = () => {
+    setOptionContentList();
+  };
+  const convertAmount = amount => {
+    return Math.floor(amount).toLocaleString();
+  };
+
+  if (isLoading) return null;
 
   return (
     <div className="detail-container">
       <div className="detail-wrap">
         <div className="detail-header">
           <header className="detail-product-info">
-            <span className="product-discount-badge">할인율% SALE</span>
-            <h3 className="product-name">
-              보라카이 가서 투명한 바다볼사람. 보기만하는거임
-            </h3>
+            <span className="product-discount-badge">{discount} % SALE</span>
+            <h3 className="product-name">{productName}</h3>
             <p className="product-price">
-              <del>900,000원</del>750,000원
+              <del>{convertAmount(price)}원</del>
+              {convertAmount(discountPrice)}원
             </p>
           </header>
 
           <div className="detail-images">
-            <img
-              className="detail-product-img"
-              src="/images/Summer.jpeg"
-              alt="여름"
-            />
+            <img className="detail-product-img" src={mainImage} alt="여름" />
           </div>
 
           <div className="detail-for-order">
@@ -88,12 +156,13 @@ const ProductDetail = () => {
                 </button>
                 <div className="option-box">
                   {optionOpen &&
-                    optionDetail.map(option => {
+                    productOptions.map(option => {
                       return (
                         <ProductDetailModal
-                          key={option.id}
+                          key={option.productOptionId}
                           option={option}
                           onSelect={onSelect}
+                          showOption={showOption}
                         />
                       );
                     })}
@@ -105,10 +174,16 @@ const ProductDetail = () => {
               {selectedOptions.map(option => {
                 return (
                   <ProductOrderModal
-                    key={option.id}
+                    key={option.productOptionId}
                     option={option}
                     removeOrder={removeOrder}
                     selectedOptions={selectedOptions}
+                    price={price}
+                    convertAmount={convertAmount}
+                    discountPrice={discountPrice}
+                    addOptionPrice={addOptionPrice}
+                    setOptionPriceList={setOptionPriceList}
+                    getOptionContent={getOptionContent}
                   />
                 );
               })}
@@ -118,11 +193,11 @@ const ProductDetail = () => {
               <dl className="total-price">
                 <dt>총 금액</dt>
                 <dd>
-                  <span>총금액 데이터올 자리(OO원)</span>
+                  <span>{totalPrice}원</span>
                 </dd>
               </dl>
               <footer className="buy-footer">
-                <button className="list-cart-btn" />
+                <button onClick={sendToCart} className="list-cart-btn" />
                 <button className="list-purchase-btn">바로 구매하기</button>
               </footer>
             </div>
@@ -136,6 +211,7 @@ const ProductDetail = () => {
           </div>
           <section className="detail-body">
             <ul>
+              <p className="detail-description">{productText}</p>
               {productDetailPic.map(info => {
                 return <ProductInfoTab key={info.id} info={info} />;
               })}
@@ -151,7 +227,6 @@ const ProductDetail = () => {
     </div>
   );
 };
-
 export default ProductDetail;
 
 const SHIPPING_GUIDE = [
