@@ -4,26 +4,47 @@ import './Product.scss';
 
 const Product = ({ product }) => {
   const [productChange, setProductChange] = useState(false);
-  const { productPic, useProductPic, productName, price, productAlt } = product;
+  const {
+    mainImage,
+    subImage,
+    productName,
+    discountPrice,
+    description,
+    price,
+    goToDetail,
+    productId,
+  } = product;
+
+  const productPrice = Math.floor(Number(price));
+  const discountedPrice = Math.floor(Number(discountPrice));
+
+  const discount = Math.floor(Number((price - discountPrice) / price) * 100);
 
   return (
-    <div>
+    <div className="productWrap" onClick={() => goToDetail(productId)}>
       <ul
-        className="productWrap"
+        className="product-ul"
         onMouseOver={() => setProductChange(true)}
         onMouseOut={() => setProductChange(false)}
       >
         <li className="productBox">
-          <Link to="#" />
-          <img
-            className="productPic"
-            src={productChange ? useProductPic : productPic}
-            alt={productAlt}
-          />
-          <div className="productInfo">
-            <p className="productName">{productName}</p>
-            <p className="productPrice">{price}</p>
-          </div>
+          <Link key={productId} to={`/products/${productId}`}>
+            <img
+              className="productPic"
+              src={productChange ? subImage : mainImage}
+              alt={description}
+            />
+            <div className="productInfo">
+              <span className="product-discount-badge">
+                <i>{discount} % SALE</i>
+              </span>
+              <p className="productName">{productName}</p>
+              <p className="productPrice">
+                <del>{productPrice}원</del>
+                {discountedPrice}원
+              </p>
+            </div>
+          </Link>
         </li>
       </ul>
     </div>

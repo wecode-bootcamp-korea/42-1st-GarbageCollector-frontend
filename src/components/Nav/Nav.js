@@ -1,15 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavCategory from './NavCategory';
 import NavRightWrap from './NavRightWrap';
 import './Nav.scss';
 
 const Nav = () => {
+  const navigate = useNavigate();
+
+  const goToMain = () => {
+    navigate(`/`);
+  };
+
   return (
     <nav>
       <div className="nav-wrap">
-        <Link to="#" />
-        <img className="logo" src="/images/newLogo.png" alt="로고" />
+        <img
+          onClick={goToMain}
+          className="logo"
+          src="/images/newLogo.png"
+          alt="로고"
+        />
         <ul className="categorywrap">
           {NAV_CATEGORIES.map(navcategory => {
             return (

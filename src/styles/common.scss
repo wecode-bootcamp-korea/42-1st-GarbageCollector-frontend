@@ -17,6 +17,7 @@
 body {
   font-size: 16px;
   color: black;
+  word-break: keep-all;
 }
 
 button {
@@ -24,6 +25,12 @@ button {
 }
 
 a {
-  color: black;
   text-decoration-line: none;
+  color: black;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
