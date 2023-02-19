@@ -13,7 +13,7 @@ const ProductOrderModal = ({
   const [productQuantity, setProductQuantity] = useState(1);
   const [computedPrice, setComputedPrice] = useState(0);
   const [isChange, setIsChange] = useState(false);
-  const { productOptionName, extraPrice, productOptionId, quantity } = option;
+  const { productOptionName, extraPrice, productOptionId } = option;
 
   const handlePlus = () => {
     setProductQuantity(productQuantity + 1);
@@ -35,7 +35,7 @@ const ProductOrderModal = ({
   useEffect(() => {
     setComputedPrice(productQuantity * (Number(discountPrice) + extraPrice));
     addOptionPrice(productOptionId, computedPrice);
-    getOptionContent(productOptionId, quantity);
+    getOptionContent(productOptionId, productQuantity);
   }, [isChange, computedPrice]);
 
   return (

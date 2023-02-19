@@ -7,11 +7,10 @@ const Search = () => {
   const [userInput, setUserInput] = useState('');
   const [filteredList, setFilteredList] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
-
+  console.log(filteredList);
   const onChangeInput = e => {
     setUserInput(e.target.value);
   };
-
   const onClickSearch = e => {
     fetch(`${BASE_URL}/search/?keyword=${userInput}`, {})
       .then(response => response.json())
@@ -41,7 +40,6 @@ const Search = () => {
             {filteredList.map(list => (
               <div key={list.productId}>
                 <Product product={list} />
-                {/* <SearchItem list={list} /> */}
               </div>
             ))}
           </div>

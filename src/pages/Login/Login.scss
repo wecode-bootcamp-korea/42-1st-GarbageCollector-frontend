@@ -115,6 +115,7 @@
     margin-top: 40px;
     color: rgb(200, 200, 200);
     font-size: 10px;
+    cursor: pointer;
     li:not(:first-child):before {
       content: '|';
       padding: 10px;

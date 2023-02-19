@@ -67,7 +67,7 @@ const Signup = () => {
   };
 
   const onClickSignup = () => {
-    fetch(`${BASE_URL}/user/signup`, {
+    fetch(`${BASE_URL}/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -81,7 +81,12 @@ const Signup = () => {
       }),
     })
       .then(response => response.json())
-      .then(data => data);
+      .then(data => {
+        alert(
+          '가입 기념 100,000 포인트가 적립되었읍니다..가치있게 써주십시오..'
+        );
+        navigate('/');
+      });
   };
 
   return (

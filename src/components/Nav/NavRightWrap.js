@@ -42,6 +42,7 @@ const NavRightWrap = ({ navrighticon }) => {
         className="navCartIcon"
         src={cartIcon}
         alt={castAlt}
+        cursor="pointer"
       />
       <div onClick={goToLogin} className="navLogIn">
         <span className="navLogInFont">로그인</span>

@@ -20,7 +20,9 @@ const Login = () => {
       setErrorText({ ...errorText, [name]: '' });
     }
   };
-
+  const goToSignup = () => {
+    navigate('/signup');
+  };
   const onBlurLoginInfo = e => {
     const { name, value, nextSibling } = e.target;
     if (value === '') {
@@ -36,7 +38,7 @@ const Login = () => {
   const onClickBtnLogin = e => {
     e.preventDefault();
 
-    fetch(`${BASE_URL}/user/login`, {
+    fetch(`${BASE_URL}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -96,7 +98,9 @@ const Login = () => {
         </button>
       </form>
       <ul className="link-cnt">
-        <li className="link">회원가입</li>
+        <li className="link" onClick={goToSignup}>
+          회원가입
+        </li>
         <li className="link">아이디 찾기</li>
         <li className="link">비밀번호 찾기</li>
       </ul>

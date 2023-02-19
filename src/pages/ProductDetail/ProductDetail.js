@@ -47,6 +47,7 @@ const ProductDetail = () => {
     setOptionContentList(optionContent);
   }, [optionContent]);
   useEffect(() => {
+    console.log('앙대');
     fetch('http://10.58.52.227:3000/carts', {
       method: 'POST',
       headers: {
@@ -103,7 +104,7 @@ const ProductDetail = () => {
   }, [userId]);
   const sendToCart = () => {
     setIsSend(!isSend);
-    setOptionContentList();
+    setOptionContentList(optionContent);
     alert('상품이 장바구니에 담겼습니다');
   };
   const convertAmount = amount => {
