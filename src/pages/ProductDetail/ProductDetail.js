@@ -9,6 +9,7 @@ import ProductBasicInfo from './ProductBasicInfo';
 import ProductRec from './ProductRec';
 import { GET_PRODUCT_DETAIL } from '../../config';
 import './ProductDetail.scss';
+
 const ProductDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [optionOpen, setOptionOpen] = useState(false);
@@ -216,6 +217,7 @@ const ProductDetail = () => {
   );
 };
 export default ProductDetail;
+
 const SHIPPING_GUIDE = [
   {
     id: 1,
