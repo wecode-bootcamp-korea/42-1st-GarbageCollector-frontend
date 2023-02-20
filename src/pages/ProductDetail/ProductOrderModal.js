@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './ProductOrder.scss';
+import './ProductOrderModal.scss';
 
 const ProductOrderModal = ({
   option,

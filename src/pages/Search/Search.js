@@ -7,7 +7,6 @@ const Search = () => {
   const [userInput, setUserInput] = useState('');
   const [filteredList, setFilteredList] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
-  console.log(filteredList);
   const onChangeInput = e => {
     setUserInput(e.target.value);
   };
