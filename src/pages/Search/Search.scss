@@ -11,9 +11,10 @@
     position: relative;
     min-width: 600px;
     max-width: 1440px;
+    height: 1000px;
     margin: 0px auto;
     padding: 102px 0px 80px;
-    height: 1000px;
+
     .search-bar-header {
       display: flex;
       position: relative;
@@ -28,7 +29,7 @@
         border: none;
         border-bottom: 2px solid #000;
         outline: none;
-        // font-family: 'BMJUA';
+        font-family: 'BMJUA';
         font-size: 20px;
       }
 
@@ -58,11 +59,6 @@
     .search-result {
       position: relative;
       margin: 20px 20px;
-
-      // img {
-      //   width: 200px;
-      //   height: 200px;
-      // }
 
       .last-img {
         position: absolute;
@@ -111,6 +107,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 150px;
+
     li {
       &:first-child {
         margin-bottom: 10px;
