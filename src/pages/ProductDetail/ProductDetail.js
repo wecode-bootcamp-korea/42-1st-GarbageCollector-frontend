@@ -42,9 +42,7 @@ const ProductDetail = () => {
   const getOptionContent = (id, quantity) => {
     setOptionContent({ productOptionId: id, quantity: quantity });
   };
-  // const add
 
-  // console.log(optionPriceList);
   useEffect(() => {
     sumOptionPrice();
   }, [addOptionPrice]);
