@@ -56,15 +56,11 @@ const NAV_CATEGORIES = [
   },
   {
     id: 2,
-    name: '머리',
+    name: '인기',
   },
   {
     id: 3,
-    name: '상체',
-  },
-  {
-    id: 4,
-    name: '하체',
+    name: '신상',
   },
 ];
 

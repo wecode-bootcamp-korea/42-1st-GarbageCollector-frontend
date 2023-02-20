@@ -20,6 +20,7 @@ const Cart = () => {
     })
       .then(response => response.json())
       .then(data => {
+        // console.log(data);
         setProductList(...productList, data.cartData.cartItems);
         setDeliveryFee(...deliveryFee, data.cartData.deliveryFee);
       });
@@ -132,7 +133,7 @@ const Cart = () => {
     const currentQuantity = productToUpdate.quantity;
     const newQuantity = currentQuantity > 0 ? currentQuantity - 1 : 0;
 
-    fetch('http://10.58.52.227:3000/carts', {
+    fetch(`http://10.58.52.227:3000/carts`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

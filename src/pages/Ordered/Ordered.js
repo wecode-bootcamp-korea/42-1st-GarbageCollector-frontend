@@ -20,7 +20,7 @@ const Ordered = () => {
   const [firstProduct] = productList;
 
   const goToMain = () => {
-    navigate('/');
+    navigate(`/`);
   };
   return (
     <div className="ordered">

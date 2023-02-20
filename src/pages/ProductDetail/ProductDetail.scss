@@ -26,12 +26,14 @@
           font-size: 12px;
           text-decoration-line: underline;
         }
+
         .product-name {
           font-size: 29px;
           font-weight: 700;
           letter-spacing: -1px;
           line-height: 42px;
         }
+
         .product-price {
           display: flex;
           align-items: center;
@@ -47,6 +49,7 @@
           }
         }
       }
+
       .detail-product-img {
         width: 500px;
         height: 500px;
@@ -133,6 +136,7 @@
             margin-right: 40px;
             font-weight: 500;
           }
+
           dd {
             font-size: 19px;
             font-weight: 700;
@@ -158,6 +162,7 @@
             background-size: 30px auto;
             cursor: pointer;
           }
+
           .list-purchase-btn {
             width: 100%;
             margin-left: 10px;
@@ -171,6 +176,7 @@
         }
       }
     }
+
     .detail-des {
       position: relative;
       width: 100%;
@@ -192,18 +198,19 @@
           cursor: pointer;
         }
       }
+
       .detail-body {
-        padding-top: 80px;
-        width: 1000px;
         display: flex;
         flex-direction: column;
+        width: 1000px;
         margin-left: 55px;
+        padding-top: 80px;
 
         .detail-description {
-          text-align: center;
           margin: 110px 0;
-          font-size: 65px;
           font-family: 'BMDOHYEON';
+          font-size: 65px;
+          text-align: center;
         }
       }
     }

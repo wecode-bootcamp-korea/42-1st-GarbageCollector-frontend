@@ -9,11 +9,12 @@
     font-weight: bold;
     text-align: center;
   }
+
   .cart-center {
     display: flex;
     justify-content: center;
-
     margin-top: 65px;
+
     .cart-left {
       margin-right: 30px;
       padding: 10px;
@@ -23,20 +24,19 @@
       .check-all-display-none {
         display: none;
       }
+
       .check-all {
         display: flex;
         position: absolute;
         justify-content: space-between;
         width: 710px;
         height: 30px;
-
         margin-top: -40px;
 
         .all-select-list {
           position: absolute;
           top: 3px;
           color: #777;
-
           font-size: 14px;
         }
 
@@ -49,41 +49,47 @@
           cursor: pointer;
         }
       }
+
       .empty-cart {
         width: 630px;
         height: 350px;
       }
+
       .empty-img {
         margin: 30px 0px 0px 30px;
       }
+
       .cart-item-container {
         display: flex;
         width: 700px;
-
         height: auto;
         margin-top: -11px;
         border-top: 1px solid #ddd;
+
         .product-info {
           display: flex;
           align-items: center;
           justify-content: space-between;
           width: 100%;
           padding: 20px 0;
+
           .item-name {
             display: flex;
             align-items: center;
-
             width: 430px;
             height: 120px;
             margin-left: 5px;
+
             .product-img {
               width: 100px;
               margin: 0px 30px;
             }
           }
+
           .price-and-delete {
             width: 125px;
             text-align: end;
+
             .delete-btn {
               width: 25px;
               height: 25px;
@@ -121,20 +127,22 @@
         text-align: center;
       }
     }
+
     .cart-right {
       position: relative;
       width: 325px;
       height: auto;
       padding-left: 25px;
       border-left: 1px solid #ddd;
+
       .purchase {
         position: sticky;
         width: 300px;
         height: 250px;
         border-top: 1px solid #ddd;
+
         .price-box {
           display: flex;
-
           flex-direction: column;
           height: 105px;
           margin-top: 10px;
@@ -154,24 +162,24 @@
             font-size: 18px;
           }
         }
+
         .estimated-amount {
           display: flex;
           justify-content: space-between;
           height: 75px;
           margin-top: 10px;
-
           padding: 15px;
           color: #d392ff;
           font-size: 18px;
         }
       }
+
       .purchase-btn {
         width: 300px;
         height: 55px;
         border: none;
         border-radius: 10px;
         opacity: 1;
-
         background-color: #d392ff;
         color: white;
         font-size: 18px;
@@ -184,6 +192,7 @@
           cursor: default;
         }
       }
+
       .purchase-btn:not(:disabled):hover {
         border: 2px solid #d392ff;
         background-color: white;

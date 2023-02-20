@@ -38,11 +38,8 @@ const MainCarousel = () => {
             transition: `all 1s`,
           }}
         >
-          {slideList.map(slide => (
-            // <li key={slide.productId}>
-            //   <img alt={slide.alt} src={slide.src} />
-            // </li>
-            <Product product={slide} />
+          {slideList.map((slide, idx) => (
+            <Product key={idx} product={slide} />
           ))}
         </ul>
       </div>
