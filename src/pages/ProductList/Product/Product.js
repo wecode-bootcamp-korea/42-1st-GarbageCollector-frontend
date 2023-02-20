@@ -21,25 +21,25 @@ const Product = ({ product }) => {
   const discount = Math.floor(Number((price - discountPrice) / price) * 100);
 
   return (
-    <div className="productWrap" onClick={() => goToDetail(productId)}>
+    <div className="product-wrap" onClick={() => goToDetail(productId)}>
       <ul
         className="product-ul"
         onMouseOver={() => setProductChange(true)}
         onMouseOut={() => setProductChange(false)}
       >
-        <li className="productBox">
+        <li className="product-box">
           <Link key={productId} to={`/products/${productId}`}>
             <img
-              className="productPic"
+              className="product-pic"
               src={productChange ? subImage : mainImage}
               alt={description}
             />
-            <div className="productInfo">
+            <div className="product-info">
               <span className="product-discount-badge">
                 <i>{discount} % SALE</i>
               </span>
-              <p className="productName">{productName}</p>
-              <p className="productPrice">
+              <p className="product-name">{productName}</p>
+              <p className="product-price">
                 <del>{productPrice}원</del>
                 {discountedPrice}원
               </p>

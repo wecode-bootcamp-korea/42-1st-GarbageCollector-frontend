@@ -5,7 +5,7 @@ const NavCategory = ({ categoryName }) => {
   const navigate = useNavigate();
 
   const goToProductList = () => {
-    navigate(`/product`);
+    navigate(`/products`);
   };
   return (
     <li onClick={goToProductList} className="categories">

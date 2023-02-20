@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import ProductDetailModal from './ProductDetailModal';
 import ProductOrderModal from './ProductOrderModal';
 import ProductDes from './ProductDes';
@@ -7,7 +8,6 @@ import ProductInfoTab from './ProductInfoTab';
 import ProductReview from './ProductReview';
 import ProductBasicInfo from './ProductBasicInfo';
 import ProductRec from './ProductRec';
-import { GET_PRODUCT_DETAIL } from '../../config';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
@@ -46,8 +46,7 @@ const ProductDetail = () => {
     setOptionContentList(optionContent);
   }, [optionContent]);
   useEffect(() => {
-    console.log('앙대');
-    fetch('http://10.58.52.227:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       method: 'POST',
       headers: {
         Authorization: token,
@@ -63,6 +62,7 @@ const ProductDetail = () => {
       .then(response => response.json())
       .then(data => {});
   }, [isSend]);
+
   const sumOptionPrice = () => {
     setTotalPrice(
       Object.values(optionPriceList).reduce(
@@ -71,9 +71,11 @@ const ProductDetail = () => {
       )
     );
   };
+
   const showOption = () => {
     setOptionOpen(!optionOpen);
   };
+
   const onSelect = option => {
     setSelectedOptions(prevState => {
       const set = new Set([...prevState, option]);
@@ -81,14 +83,16 @@ const ProductDetail = () => {
     });
     setOptionOpen(false);
   };
+
   const removeOrder = id => {
     const updatedSelectedOptions = selectedOptions.filter(
       option => option.productOptionId !== id
     );
     setSelectedOptions(updatedSelectedOptions);
   };
+
   useEffect(() => {
-    fetch(`${GET_PRODUCT_DETAIL}/${userId}`, {
+    fetch(`${BASE_URL}/products/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })

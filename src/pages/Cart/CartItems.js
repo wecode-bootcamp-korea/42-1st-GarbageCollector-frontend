@@ -9,7 +9,7 @@ const CartItems = props => {
     handleSingleCheck,
     isAllCheck,
   } = props;
-  // console.log(props);
+
   return (
     <div className="Cart-items">
       <div className="cart-item-container">

@@ -21,7 +21,7 @@ const ProductList = () => {
 
   return (
     <div className="product-page-container">
-      <div className="productList">
+      <div className="product-list">
         {productList.map(product => (
           <Product key={product.id} product={product} goToDetail={goToDetail} />
         ))}

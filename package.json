@@ -46,18 +46,5 @@
     "stylelint-config-property-sort-order-smacss": "^9.0.0",
     "stylelint-config-recommended-scss": "^8.0.0",
     "stylelint-scss": "^4.3.0"
-  },
-  "description": "Team GarbageCollector 이동민 이홍열 박준현 황수영 이해인 박세희",
-  "main": ".stylelintrc.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wecode-bootcamp-korea/42-1st-GarbageCollector-frontend.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wecode-bootcamp-korea/42-1st-GarbageCollector-frontend/issues"
-  },
-  "homepage": "https://github.com/wecode-bootcamp-korea/42-1st-GarbageCollector-frontend#readme"
+  }
 }
