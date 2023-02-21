@@ -1,26 +1,29 @@
-.productWrap {
+.product-wrap {
   display: flex;
-  // display: inline-block;
+  display: inline-block;
   margin: 0 0 30px 24px;
   text-align: center;
+
   :hover {
     color: #d392ff;
   }
+
   .product-ul {
-    .productBox {
+    .product-box {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       border: 1px solid transparent;
       cursor: pointer;
 
-      .productPic {
+      .product-pic {
         width: 230px;
         height: 230px;
         border-radius: 2px;
       }
-      .productInfo {
+      
+      .product-info {
         display: flex;
         flex-direction: column;
         margin-top: 10px;
@@ -28,6 +31,11 @@
         font-weight: 600;
         text-align: center;
         word-break: keep-all;
+
+        p {
+          padding: 10px 0;
+          transition: 0.3s ease-out;
+        }
 
         .product-discount-badge {
           position: relative;
@@ -40,10 +48,6 @@
           padding-right: 8px;
           color: #ccc;
         }
-      }
-      .productInfo p {
-        padding: 10px 0;
-        transition: 0.3s ease-out;
       }
     }
   }
