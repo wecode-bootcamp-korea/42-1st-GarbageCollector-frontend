@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import ProductDetailModal from './ProductDetailModal';
 import ProductOrderModal from './ProductOrderModal';
 import ProductDes from './ProductDes';
@@ -7,7 +8,6 @@ import ProductInfoTab from './ProductInfoTab';
 import ProductReview from './ProductReview';
 import ProductBasicInfo from './ProductBasicInfo';
 import ProductRec from './ProductRec';
-import { GET_PRODUCT_DETAIL } from '../../config';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
@@ -27,9 +27,11 @@ const ProductDetail = () => {
     quantity: 0,
   });
   const [isSend, setIsSend] = useState(false);
+
   // const token = localStorage.getItem('token');
   const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM';
+
   const discount = Math.floor(Number((price - discountPrice) / price) * 100);
   const params = useParams();
   const userId = params.id;
@@ -39,15 +41,17 @@ const ProductDetail = () => {
   const getOptionContent = (id, quantity) => {
     setOptionContent({ productOptionId: id, quantity: quantity });
   };
+
   useEffect(() => {
     sumOptionPrice();
   }, [addOptionPrice]);
+
   useEffect(() => {
     setOptionContentList(optionContent);
   }, [optionContent]);
+
   useEffect(() => {
-    console.log('앙대');
-    fetch('http://10.58.52.227:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       method: 'POST',
       headers: {
         Authorization: token,
@@ -63,6 +67,7 @@ const ProductDetail = () => {
       .then(response => response.json())
       .then(data => {});
   }, [isSend]);
+
   const sumOptionPrice = () => {
     setTotalPrice(
       Object.values(optionPriceList).reduce(
@@ -88,7 +93,7 @@ const ProductDetail = () => {
     setSelectedOptions(updatedSelectedOptions);
   };
   useEffect(() => {
-    fetch(`${GET_PRODUCT_DETAIL}/${userId}`, {
+    fetch(`${BASE_URL}/products/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })

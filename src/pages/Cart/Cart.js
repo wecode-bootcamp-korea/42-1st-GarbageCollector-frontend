@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import CartItems from './CartItems';
 import './Cart.scss';
-import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [productList, setProductList] = useState([]);
@@ -10,7 +11,7 @@ const Cart = () => {
 
   const isCheckedBtnAll = productList.length === isAllCheck.length;
   useEffect(() => {
-    fetch('http://10.58.52.227:3000/carts ', {
+    fetch(`${BASE_URL}/carts`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +28,7 @@ const Cart = () => {
   }, []);
   const navigate = useNavigate();
   const deleteProduct = cartId => {
-    const url = `http://10.58.52.227:3000/carts?cartId=${cartId}`;
+    const url = `${BASE_URL}/carts?cartId=${cartId}`;
     fetch(url, {
       method: 'DELETE',
       headers: {
@@ -56,7 +57,7 @@ const Cart = () => {
 
   const handleDeleteSelected = () => {
     const selectedProductIds = isAllCheck;
-    const url = `http://10.58.52.227:3000/carts?cartId=${selectedProductIds.join(
+    const url = `${BASE_URL}/carts?cartId=${selectedProductIds.join(
       '&cartId='
     )}`;
 
@@ -95,7 +96,7 @@ const Cart = () => {
       );
       return;
     }
-    fetch('http://10.58.52.227:3000/carts', {
+    fetch(`${BASE_URL}/carts`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -133,7 +134,7 @@ const Cart = () => {
     const currentQuantity = productToUpdate.quantity;
     const newQuantity = currentQuantity > 0 ? currentQuantity - 1 : 0;
 
-    fetch(`http://10.58.52.227:3000/carts`, {
+    fetch(`${BASE_URL}/carts`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

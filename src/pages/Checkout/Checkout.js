@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import CheckoutList from './CheckoutList';
-import './Checkout.scss';
 import UserInfo from './UserInfo';
+import './Checkout.scss';
 
 const Checkout = () => {
   const [productList, setProductList] = useState([]);
@@ -24,7 +25,7 @@ const Checkout = () => {
   // const { state } = location.state;
   // console.log(location.state);
   useEffect(() => {
-    fetch('http://10.58.52.227:3000/orders/orderform', {
+    fetch(`${BASE_URL}:3000/orders/orderform`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,21 +47,20 @@ const Checkout = () => {
     })
       .then(res => res.json())
       .then(({ data }) => {
-        // console.log(data);
         setProductList(data.productOptions);
         setGetPayment(data);
-        console.log(data);
       });
-    // setProductList(location.state[0]);
-    // setDeliveryFee(location.state[1]);
   }, [location.state]);
+
   const onChangeInput = e => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
+
   const onClickBtnPay = () => {
     navigate('/ordered', { state: inputs });
   };
+
   const onClickSubmitInfo = () => {
     setUserInfo([...userInfo, inputs]);
     setInputs({ userName: '', userPw: '', userAddress: '', userComment: '' });
@@ -85,7 +85,6 @@ const Checkout = () => {
 
   const userPoint = Number(getPayment.userPoint).toLocaleString();
   const cartId = productList.cartId;
-  // const deliveryFee = productList[0]?.deliveryFee;
   const totalAmount = productList.reduce(
     (acc, curr) => acc + curr.quantity * curr.productPriceBeforeDiscount,
     0

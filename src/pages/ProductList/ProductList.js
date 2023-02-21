@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 import Product from './Product/Product';
 import './ProductList.scss';
 
@@ -10,8 +11,9 @@ const ProductList = () => {
   const goToDetail = id => {
     navigate(`/products/${id}`);
   };
+
   useEffect(() => {
-    fetch('http://10.58.52.227:3000/products', {
+    fetch(`${BASE_URL}/products`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -21,9 +23,13 @@ const ProductList = () => {
 
   return (
     <div className="product-page-container">
-      <div className="productList">
+      <div className="product-list">
         {productList.map(product => (
-          <Product key={product.id} product={product} goToDetail={goToDetail} />
+          <Product
+            key={product.productId}
+            product={product}
+            goToDetail={goToDetail}
+          />
         ))}
       </div>
     </div>
