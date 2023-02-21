@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import React from 'react';
+import { BASE_URL } from '../../config';
 import './Ordered.scss';
 
 const Ordered = () => {
@@ -9,7 +9,7 @@ const Ordered = () => {
   const navigate = useNavigate();
   const locate = useLocation();
   useEffect(() => {
-    fetch('http://10.58.52.227:3000/orders/payment', {
+    fetch(`${BASE_URL}/orders/payment`, {
       method: 'POST',
       authorization:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM',
