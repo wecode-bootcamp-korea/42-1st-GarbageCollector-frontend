@@ -21,7 +21,6 @@ const Cart = () => {
     })
       .then(response => response.json())
       .then(data => {
-        // console.log(data);
         setProductList(...productList, data.cartData.cartItems);
         setDeliveryFee(...deliveryFee, data.cartData.deliveryFee);
       });
