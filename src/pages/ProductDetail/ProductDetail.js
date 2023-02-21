@@ -27,9 +27,8 @@ const ProductDetail = () => {
     quantity: 0,
   });
   const [isSend, setIsSend] = useState(false);
-  // const token = localStorage.getItem('token');
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnYXJiYWdlQ29sbGVjdG9Pd25lciIsInN1YiI6ImdhcmJhZ2VXb3JsZCIsImlhdCI6MTY3NjYwNDE0NCwiZXhwIjoxNjc2NjkwNTQ0LCJ1c2VySWQiOjE1fQ.vsFvb3X8akL_FSQw4gPsLFkBhAslBTAWvoIUpLorHiM';
+  const token = localStorage.getItem('token');
+
   const discount = Math.floor(Number((price - discountPrice) / price) * 100);
   const params = useParams();
   const userId = params.id;

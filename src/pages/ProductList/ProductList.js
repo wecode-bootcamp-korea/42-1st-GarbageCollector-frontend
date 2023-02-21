@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../config';
 import Product from './Product/Product';
+import ProductCategory from './ProductCategory';
 import './ProductList.scss';
 
 const ProductList = () => {
   const [productList, setProductList] = useState([]);
   const navigate = useNavigate();
+  const params = useParams();
 
   const goToDetail = id => {
     navigate(`/products/${id}`);
@@ -23,6 +25,7 @@ const ProductList = () => {
 
   return (
     <div className="product-page-container">
+      <ProductCategory />
       <div className="product-list">
         {productList.map(product => (
           <Product
