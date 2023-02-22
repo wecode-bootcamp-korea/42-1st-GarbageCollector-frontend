@@ -19,7 +19,8 @@
 - (이동민[F], 이해인[F], 박준현[F], 이홍열[B], 황수영[B], 박세희[B])
 
 ## 데모 영상 
-- * https://www.youtube.com/watch?v=ujv99pNE0Fw 
+
+https://www.youtube.com/watch?v=ujv99pNE0Fw 
 
 ## 적용 기술 및 구현 기능 
 
